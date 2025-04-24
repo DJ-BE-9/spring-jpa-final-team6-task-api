@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -33,5 +35,10 @@ public class MilestoneServiceImpl implements MilestoneService {
     public void deleteMilestone(long milestoneId) {
         Milestone m = milestoneRepository.findById(milestoneId).orElseThrow(() -> new MilestoneNotFoundException("milestone not found id: " + milestoneId));
         milestoneRepository.deleteById(milestoneId);
+    }
+
+    @Override
+    public List<Milestone> getMilestonesByProjectId(long projectId) {
+        return milestoneRepository.findAllByProject_ProjectId(projectId);
     }
 }
