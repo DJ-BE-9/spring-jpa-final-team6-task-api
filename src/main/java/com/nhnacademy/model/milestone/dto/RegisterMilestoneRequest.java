@@ -1,20 +1,14 @@
 package com.nhnacademy.model.milestone.dto;
 
-import jakarta.persistence.*;
+import com.nhnacademy.model.project.entity.Project;
 import jakarta.validation.constraints.NotNull;
 import lombok.Value;
 
 @Value
 public class RegisterMilestoneRequest {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long milestoneId;
+    @NotNull
+    String milestoneName;
 
     @NotNull
-    private String milestoneName;
-
-    @NotNull
-    @ManyToOne(optional = false)
-    @JoinColumn(name="project_id")
-    private Project project;
+    Project project;
 }

@@ -1,5 +1,6 @@
 package com.nhnacademy.model.milestone.entity;
 
+import com.nhnacademy.model.project.entity.Project;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;

@@ -8,5 +8,4 @@ public class RegisterWriterRequest {
 
     @NotNull
     String userId;
-
 }

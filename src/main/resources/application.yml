@@ -1,6 +1,8 @@
 spring:
   application:
     name: NHN Academy - Spring Boot JPA
+  jackson:
+    property-naming-strategy: SNAKE_CASE
   jpa:
     open-in-view: false
     show-sql: true
