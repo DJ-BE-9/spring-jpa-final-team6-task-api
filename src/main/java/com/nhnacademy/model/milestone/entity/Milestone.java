@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.ZonedDateTime;
+
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,5 +26,8 @@ public class Milestone {
     @ManyToOne(optional = false)
     @JoinColumn(name="project_id")
     private Project project;
+
+    private ZonedDateTime milestoneStartedAt;
+    private ZonedDateTime milestoneEndedAt;
 
 }

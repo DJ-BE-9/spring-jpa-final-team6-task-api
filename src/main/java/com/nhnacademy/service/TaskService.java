@@ -15,7 +15,7 @@ public interface TaskService {
     //전체 조회
     List<Task> getTasksByProjectId(long projectId);
     //register
-    void save(TaskRegisterRequest taskRegisterRequest, long projectId);
+    Task save(TaskRegisterRequest taskRegisterRequest, long projectId);
     //update
     Task updateTask(long taskId, TaskUpdateRequest request);
     //delete

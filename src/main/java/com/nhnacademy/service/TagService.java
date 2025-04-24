@@ -18,10 +18,10 @@ public interface TagService {
     List<Tag> findAllByProjectId(Project project);
 
     //등록
-    void save(TagRegisterRequest request, long projectId);
+    Tag save(TagRegisterRequest request, long projectId);
 
     //수정
-    void updateTag(long tagId, TagUpdateRequest request);
+    Tag updateTag(long tagId, TagUpdateRequest request);
 
     //삭제
     void delete(long tagId);

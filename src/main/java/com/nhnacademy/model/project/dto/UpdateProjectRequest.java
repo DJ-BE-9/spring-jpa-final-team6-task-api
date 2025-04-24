@@ -9,9 +9,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class RegisterProjectRequest {
+public class UpdateProjectRequest {
 
     String projectName;
     String projectState;
-
 }

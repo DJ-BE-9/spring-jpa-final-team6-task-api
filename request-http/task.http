@@ -1,0 +1,35 @@
+### 등록
+POST localhost:7070/project/1/task
+Content-Type: application/json
+
+{
+  "taskTitle": "task test1",
+  "taskDescription": "This is description"
+}
+
+### 등록
+POST localhost:7070/project/1/task
+Content-Type: application/json
+
+{
+  "taskTitle": "2222",
+  "taskDescription": "This is description2"
+}
+
+### 단일 조회
+GET localhost:7070/project/1/task/1
+
+### 전체 조회
+GET localhost:7070/project/1/task
+
+### 수정
+PUT localhost:7070/project/1/task/1
+Content-Type: application/json
+
+{
+  "taskTitle": "task edit",
+  "taskDescription": "hello"
+}
+
+### 삭제
+DELETE localhost:7070/project/1/task/1

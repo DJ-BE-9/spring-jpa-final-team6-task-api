@@ -1,5 +1,6 @@
 package com.nhnacademy.service.impl;
 
+import com.nhnacademy.exception.ProjectNotFoundException;
 import com.nhnacademy.exception.tag.TagNotFoundException;
 import com.nhnacademy.model.project.entity.Project;
 import com.nhnacademy.model.tag.dto.TagRegisterRequest;
@@ -44,20 +45,20 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
-     public void save(TagRegisterRequest request, long projectId) {
+     public Tag save(TagRegisterRequest request, long projectId) {
         Project project = projectRepository.findById(projectId)
-                .orElseThrow(() -> new ProjectNotFoundException(projectId));
+                .orElseThrow(() -> new ProjectNotFoundException(projectId+" not found"));
 
         Tag tag = new Tag(null, request.getTagName(),project);
-        tagRepository.save(tag);
+        return tagRepository.save(tag);
     }
 
     @Override
-    public void updateTag(long tagId, TagUpdateRequest request) {
+    public Tag updateTag(long tagId, TagUpdateRequest request) {
         Tag tag = tagRepository.findById(tagId)
                 .orElseThrow(() -> new TagNotFoundException(tagId));
         tag.setTagName(request.getTagName());
-        tagRepository.save(tag);
+        return tagRepository.save(tag);
     }
 
     @Override

@@ -7,11 +7,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class RegisterProjectRequest {
-
-    String projectName;
-    String projectState;
-
+@AllArgsConstructor
+public class ResponseCreateProjectDto {
+    private long projectId;
 }

@@ -15,5 +15,6 @@ public class TaskDeleteController {
     @DeleteMapping("/project/{projectId}/task/{taskId}")
     public ResponseEntity<String> deleteTask(@PathVariable long projectId, @PathVariable long taskId) {
         taskService.deleteTask(taskId);
+        return ResponseEntity.ok("task deleted");
     }
 }

@@ -26,8 +26,8 @@ public class Project {
     @Column(name = "project_state")
     private State projectState;
 
-    //TODO user fk
-    @NotNull
-    @Column(name = "proejct_manager_id")
-    private long projectManagerId;
+    public Project(String projectName, State projectState) {
+        this.projectName = projectName;
+        this.projectState = projectState;
+    }
 }

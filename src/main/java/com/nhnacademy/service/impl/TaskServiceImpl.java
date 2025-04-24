@@ -1,5 +1,6 @@
 package com.nhnacademy.service.impl;
 
+import com.nhnacademy.exception.ProjectNotFoundException;
 import com.nhnacademy.exception.task.TaskAlreadyExistsException;
 import com.nhnacademy.exception.task.TaskNotFoundException;
 import com.nhnacademy.model.project.entity.Project;
@@ -36,19 +37,21 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public List<Task> getTasksByProjectId(long projectId) {
         Project project = projectRepository.findById(projectId)
-                .orElseThrow(() -> new ProjectNotFoundException(projectId));
+                .orElseThrow(() -> new ProjectNotFoundException(projectId+ " not found"));
         return taskRepository.findAllByProject(project);
     }
 
     @Override
-    public void save(TaskRegisterRequest request,long projectId) {
+    public Task save(TaskRegisterRequest request,long projectId) {
         String title = request.getTaskTitle();
         if(taskRepository.findByTaskTitleContains(title)){
             throw new TaskAlreadyExistsException(title);
         }
+        Project project = projectRepository.findById(projectId)
+                .orElseThrow(() -> new ProjectNotFoundException(projectId+ " not found"));
 
-        Task task = new Task(request.getTaskTitle(), request.getTaskDescription(), projectId); // TODO projectRepository 받아와서 넣으면 됨
-        taskRepository.save(task);
+        Task task = new Task(request.getTaskTitle(), request.getTaskDescription(), project);
+        return taskRepository.save(task);
     }
 
     @Override
@@ -63,7 +66,7 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public void deleteTask(long taskId) {
         if(taskRepository.existsById(taskId)) {
-
+            throw new TaskNotFoundException(taskId);
         }
         taskRepository.deleteById(taskId);
     }
