@@ -5,26 +5,31 @@ import com.nhnacademy.model.project.entity.Project;
 import com.nhnacademy.model.projectTag.entity.ProjectTag;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Getter
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Task {
+
+    public Task(String taskTitle, String taskDescription, Project project) {
+        this.taskTitle = taskTitle;
+        this.taskDescription = taskDescription;
+        this.project = project;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "task_id")
     private long taskId;
 
     @NotNull
+    @Setter
     @Column(name = "task_title")
     private String taskTitle;
 
     @NotNull
+    @Setter
     @Column(name = "task_description")
     private String taskDescription;
 

@@ -1,4 +1,4 @@
-package com.nhnacademy.runner;
+package com.nhnacademy.common.runner;
 
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
