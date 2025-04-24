@@ -3,22 +3,25 @@ package com.nhnacademy.model.tag.entity;
 import com.nhnacademy.model.project.entity.Project;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Getter
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Tag {
+
+    public Tag(String tagName) {
+        this.tagName = tagName;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long tagId;
+    private Long tagId;
 
     @NotNull
-    @Column(name = "tag_name")
+    @Setter
+    @Column(name = "tag_name", unique = true)
     private String tagName;
 
     //fk

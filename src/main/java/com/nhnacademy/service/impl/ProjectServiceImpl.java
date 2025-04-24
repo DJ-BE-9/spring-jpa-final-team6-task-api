@@ -68,11 +68,17 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+<<<<<<< HEAD
     public Project getProjectById(Long projectId) {
         return projectRepository.findById(projectId).orElse(null);
     }
 
 
+=======
+    public Project getProject(Long projectId) {
+        return projectRepository.findProjectByProjectId(projectId);
+    }
+>>>>>>> 8f2ecebe183c4b7001af35b9b8c37618eadf2f67
 
 
 }

@@ -12,6 +12,11 @@ public interface ProjectService {
     void deleteProject(Long projectId);
     void updateProject(Long projectId, UpdateProjectRequest updateProjectRequest);
     List<Project> getAllProjectsByUserId(String userId);
+<<<<<<< HEAD
     Project getProjectById(Long projectId);
+=======
+
+    Project getProject(Long projectId);
+>>>>>>> 8f2ecebe183c4b7001af35b9b8c37618eadf2f67
 
 }
