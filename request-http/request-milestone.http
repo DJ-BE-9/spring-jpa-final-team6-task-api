@@ -1,10 +1,11 @@
 ### POST localhost:7070/project 프로젝트 등록 1
-POST http://localhost:7070/project
+POST http://localhost:7070/project/1/milestone
 Content-Type: application/json
 
 {
-  "project_name": "프로젝트1",
-  "project_state": "ACTIVE"
+  "milestone_name": "진행 전",
+  "milestone_started_at": "",
+  "milestone_ended_at": ""
 }
 
 ### POST localhost:7070/project 프로젝트 등록 2

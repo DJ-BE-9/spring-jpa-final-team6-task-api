@@ -1,6 +1,5 @@
 spring:
-  application:
-    name: NHN Academy - Spring Boot JPA
+
   jackson:
     property-naming-strategy: SNAKE_CASE
   jpa:

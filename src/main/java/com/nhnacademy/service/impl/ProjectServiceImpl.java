@@ -67,6 +67,11 @@ public class ProjectServiceImpl implements ProjectService {
         return projectMemberRepository.findAllProjectByUserId(userId);
     }
 
+    @Override
+    public Project getProjectById(Long projectId) {
+        return projectRepository.findById(projectId).orElse(null);
+    }
+
 
 
 

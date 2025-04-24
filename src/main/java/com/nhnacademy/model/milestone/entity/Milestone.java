@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.ZonedDateTime;
 
@@ -20,6 +21,7 @@ public class Milestone {
     private long milestoneId;
 
     @NotNull
+    @Setter
     private String milestoneName;
 
     @NotNull
@@ -27,7 +29,17 @@ public class Milestone {
     @JoinColumn(name="project_id")
     private Project project;
 
+    @Setter
     private ZonedDateTime milestoneStartedAt;
+    @Setter
     private ZonedDateTime milestoneEndedAt;
+
+    public Milestone(String milestoneName, ZonedDateTime milestoneStartedAt, ZonedDateTime milestoneEndedAt, Project project) {
+        this.milestoneName = milestoneName;
+        this.milestoneStartedAt = milestoneStartedAt;
+        this.milestoneEndedAt = milestoneEndedAt;
+        this.project = project;
+
+    }
 
 }
