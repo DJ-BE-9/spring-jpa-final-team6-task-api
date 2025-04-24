@@ -1,12 +1,13 @@
 package com.nhnacademy.model.projectMember.dto;
 
-import com.nhnacademy.model.project.entity.Project;
-import jakarta.validation.constraints.NotNull;
-import lombok.Value;
+import lombok.*;
 
-@Value
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class RegisterProjectMemberRequest {
 
-    @NotNull
-    Project project;
+    private long projectId;
+    private boolean projectManager;
 }
