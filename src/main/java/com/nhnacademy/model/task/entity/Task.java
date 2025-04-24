@@ -1,6 +1,7 @@
 package com.nhnacademy.model.task.entity;
 
 
+import com.nhnacademy.model.project.entity.Project;
 import com.nhnacademy.model.projectTag.entity.ProjectTag;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -30,7 +31,7 @@ public class Task {
     //fk
     @ManyToOne(optional = false)
     @JoinColumn(name = "project_id", nullable = false)
-    private ProjectTag projectTag;
+    private Project project;
 
 
 }

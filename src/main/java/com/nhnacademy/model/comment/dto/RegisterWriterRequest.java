@@ -9,8 +9,4 @@ public class RegisterWriterRequest {
     @NotNull
     String userId;
 
-    @NotNull
-    String commentContent;
-
-
 }
