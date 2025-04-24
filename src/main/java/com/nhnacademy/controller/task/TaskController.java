@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 public class TaskController {
@@ -18,6 +20,11 @@ public class TaskController {
     public ResponseEntity<Task> getTask(@PathVariable long projectId, @PathVariable long taskId) {
         Task task = taskService.getTaskById(taskId);
         return ResponseEntity.status(HttpStatus.OK).body(task);
+    }
+    @GetMapping("project/{projectId}/task")
+    public ResponseEntity<List<Task>> getTasks(@PathVariable long projectId) {
+        List<Task> taskList = taskService.getAllTasksByProjectId(projectId);
+        return ResponseEntity.status(HttpStatus.OK).body(taskList);
     }
 
 

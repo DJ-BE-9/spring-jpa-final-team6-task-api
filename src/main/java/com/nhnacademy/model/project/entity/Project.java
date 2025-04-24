@@ -19,7 +19,7 @@ public class Project {
     private long projectId;
 
     @NotNull
-    @Column(name = "project_name")
+    @Column(name = "project_name", unique = true)
     private String projectName;
 
     @NotNull

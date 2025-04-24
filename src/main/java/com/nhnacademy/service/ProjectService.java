@@ -14,5 +14,6 @@ public interface ProjectService {
     void updateProject(Long projectId, UpdateProjectRequest updateProjectRequest);
     List<Project> getAllProjectsByUserId(String userId);
 
+    Project getProject(Long projectId);
 
 }

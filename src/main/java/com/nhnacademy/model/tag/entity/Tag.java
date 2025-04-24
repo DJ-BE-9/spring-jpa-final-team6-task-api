@@ -21,7 +21,7 @@ public class Tag {
 
     @NotNull
     @Setter
-    @Column(name = "tag_name")
+    @Column(name = "tag_name", unique = true)
     private String tagName;
 
     //fk

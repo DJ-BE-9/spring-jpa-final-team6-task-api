@@ -13,7 +13,7 @@ public interface TaskService {
     //특정 조회
     Task getTaskById(long id);
     //전체 조회
-    List<Task> getTasksByProjectId(long projectId);
+    List<Task> getAllTasksByProjectId(long projectId);
     //register
     Task save(TaskRegisterRequest taskRegisterRequest, long projectId);
     //update

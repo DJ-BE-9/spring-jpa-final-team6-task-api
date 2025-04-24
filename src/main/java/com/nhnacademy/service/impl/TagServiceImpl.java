@@ -1,6 +1,7 @@
 package com.nhnacademy.service.impl;
 
 import com.nhnacademy.exception.ProjectNotFoundException;
+import com.nhnacademy.exception.tag.TagAlreadyExistsException;
 import com.nhnacademy.exception.tag.TagNotFoundException;
 import com.nhnacademy.model.project.entity.Project;
 import com.nhnacademy.model.tag.dto.TagRegisterRequest;
@@ -48,7 +49,10 @@ public class TagServiceImpl implements TagService {
      public Tag save(TagRegisterRequest request, long projectId) {
         Project project = projectRepository.findById(projectId)
                 .orElseThrow(() -> new ProjectNotFoundException(projectId+" not found"));
-
+        String tagName = request.getTagName();
+        if(tagRepository.existsByTagName(tagName)) {
+            throw new TagAlreadyExistsException(tagName);
+        }
         Tag tag = new Tag(null, request.getTagName(),project);
         return tagRepository.save(tag);
     }

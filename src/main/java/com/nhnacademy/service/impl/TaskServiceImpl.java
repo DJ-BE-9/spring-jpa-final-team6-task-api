@@ -35,7 +35,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public List<Task> getTasksByProjectId(long projectId) {
+    public List<Task> getAllTasksByProjectId(long projectId) {
         Project project = projectRepository.findById(projectId)
                 .orElseThrow(() -> new ProjectNotFoundException(projectId+ " not found"));
         return taskRepository.findAllByProject(project);
@@ -44,7 +44,7 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public Task save(TaskRegisterRequest request,long projectId) {
         String title = request.getTaskTitle();
-        if(taskRepository.findByTaskTitleContains(title)){
+        if(taskRepository.existsByTaskTitle(title)){
             throw new TaskAlreadyExistsException(title);
         }
         Project project = projectRepository.findById(projectId)
@@ -60,14 +60,15 @@ public class TaskServiceImpl implements TaskService {
                 .orElseThrow(() -> new TaskNotFoundException(taskId));
         task.setTaskTitle(request.getTaskTitle());
         task.setTaskDescription(request.getTaskDescription());
+        taskRepository.save(task);
         return task;
     }
 
     @Override
     public void deleteTask(long taskId) {
-        if(taskRepository.existsById(taskId)) {
-            throw new TaskNotFoundException(taskId);
-        }
+//        if(taskRepository.existsById(taskId)) {
+//            throw new TaskNotFoundException(taskId);
+//        }
         taskRepository.deleteById(taskId);
     }
 }

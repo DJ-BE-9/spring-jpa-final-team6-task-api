@@ -6,6 +6,7 @@ import com.nhnacademy.model.tag.dto.ResponseGetAllDto;
 import com.nhnacademy.model.tag.dto.ResponseGetDto;
 import com.nhnacademy.model.tag.entity.Tag;
 import com.nhnacademy.repository.ProjectRepository;
+import com.nhnacademy.service.ProjectService;
 import com.nhnacademy.service.TagService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,7 +21,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TagController {
     private final TagService tagService;
-    private final ProjectRepository projectRepository;
+    private final ProjectService projectService;
 
     //특정 조회
     @GetMapping("/project/{projectId}/tag/{tagId}")
@@ -33,8 +34,7 @@ public class TagController {
     //프로젝트 별 조회
     @GetMapping("/project/{projectId}/tag")
     public ResponseEntity<List<Tag>> getTags(@PathVariable long projectId) {
-        Project project = projectRepository.findById(projectId)
-                .orElseThrow(() -> new ProjectNotFoundException(projectId + " not found"));
+        Project project = projectService.getProject(projectId);
 
         List<Tag> tagList = tagService.findAllByProjectId(project);
 

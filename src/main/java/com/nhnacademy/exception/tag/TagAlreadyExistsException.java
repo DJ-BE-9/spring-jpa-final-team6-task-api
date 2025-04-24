@@ -1,7 +1,7 @@
 package com.nhnacademy.exception.tag;
 
 public class TagAlreadyExistsException extends RuntimeException {
-    public TagAlreadyExistsException(long tagId) {
-        super("Tag " + tagId + " already exists");
+    public TagAlreadyExistsException(String tagName) {
+        super("Tag " + tagName + " already exists");
     }
 }

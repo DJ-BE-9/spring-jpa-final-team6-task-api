@@ -10,6 +10,7 @@ import lombok.*;
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class Task {
 
     public Task(String taskTitle, String taskDescription, Project project) {
@@ -25,7 +26,7 @@ public class Task {
 
     @NotNull
     @Setter
-    @Column(name = "task_title")
+    @Column(name = "task_title", unique = true)
     private String taskTitle;
 
     @NotNull
