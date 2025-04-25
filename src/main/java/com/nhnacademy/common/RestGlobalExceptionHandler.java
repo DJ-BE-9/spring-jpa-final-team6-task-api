@@ -58,7 +58,7 @@ public class RestGlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exceptionResponse);
     }
 
-    //projectTag
+    //projectTag.
     @ExceptionHandler(ProjectTagAlreadyExistsException.class)
     public ResponseEntity<ExceptionResponse> projectAlreadyExistsException(ProjectTagAlreadyExistsException e) {
         ExceptionResponse exceptionResponse = new ExceptionResponse(e.getMessage(),HttpStatus.BAD_REQUEST.toString(), LocalDateTime.now());
