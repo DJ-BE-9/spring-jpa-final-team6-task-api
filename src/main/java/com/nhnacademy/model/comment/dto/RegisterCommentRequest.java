@@ -8,7 +8,6 @@ public class RegisterCommentRequest {
 
     @NotNull
     String commentContent;
-
     @NotNull
     long taskId;
 }

@@ -1,0 +1,60 @@
+### POST localhost:7070/project/1/milestone Milestone 등록 1
+POST http://localhost:7070/project/1/milestone
+Content-Type: application/json
+
+{
+  "milestone_name": "진행 전",
+  "milestone_started_at": "2025-04-24T21:00:00+09:00",
+  "milestone_ended_at": "2025-05-01T18:00:00+09:00"
+}
+
+### POST localhost:7070/project/1/milestone Milestone 등록 2
+POST http://localhost:7070/project/1/milestone
+Content-Type: application/json
+
+{
+  "milestone_name": "완료",
+  "milestone_started_at": "2025-04-10T10:00:00+09:00",
+  "milestone_ended_at": "2025-04-20T17:00:00+09:00"
+}
+
+### POST localhost:7070/project/1/milestone Milestone 등록 3
+POST http://localhost:7070/project/1/milestone
+Content-Type: application/json
+
+{
+  "milestone_name": "배포 전",
+  "milestone_started_at": "2025-04-28T09:00:00+09:00",
+  "milestone_ended_at": "2025-04-30T23:59:00+09:00"
+}
+
+### POST localhost:7070/project/1/milestone Milestone 등록 4
+POST http://localhost:7070/project/1/milestone
+Content-Type: application/json
+
+{
+  "milestone_name": "배포 후",
+  "milestone_started_at": "2025-05-01T00:00:00+09:00",
+  "milestone_ended_at": "2025-05-07T18:00:00+09:00"
+}
+
+### PUT localhost:7070/project/{projectId}/milestone/{milestoneId} Milestone 수정
+PUT http://localhost:7070/project/1/milestone/1
+Content-Type: application/json
+
+{
+  "milestone_name": "진행 전 - 이름수정",
+  "milestone_started_at": "2025-02-01T21:00:00+09:00",
+  "milestone_ended_at": "2025-02-09T18:00:00+09:00"
+}
+
+### GET localhost:7070/project/{projectId}/milestone 해당 프로젝트의 milestone 목록 출력
+GET http://localhost:7070/project/1/milestone
+
+### DELETE localhost:7070/project/{projectId}/milestone/{milestoneId} Milestone 삭제
+DELETE http://localhost:7070/project/1/milestone/1
+
+
+
+
+

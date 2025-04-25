@@ -11,7 +11,7 @@ import java.time.ZonedDateTime;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class RegisterMilestoneRequest {
+public class UpdateMilestoneRequest {
     String milestoneName;
     ZonedDateTime milestoneStartedAt;
     ZonedDateTime milestoneEndedAt;
