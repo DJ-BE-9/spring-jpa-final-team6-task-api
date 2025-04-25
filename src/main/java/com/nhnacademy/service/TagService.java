@@ -12,7 +12,7 @@ public interface TagService {
     boolean existsTag(long tagId);
 
     //특정 조회
-    Tag findByIdAndProjectId(long tagId);
+    Tag findByTagId(long tagId);
 
     //프로젝트 별 조회
     List<Tag> findAllByProjectId(Project project);

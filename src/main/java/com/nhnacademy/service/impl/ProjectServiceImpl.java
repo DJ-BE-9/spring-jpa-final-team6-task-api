@@ -68,7 +68,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public Project getProject(Long projectId) {
+    public Project getProjectById(Long projectId) {
         return projectRepository.findProjectByProjectId(projectId);
     }
 

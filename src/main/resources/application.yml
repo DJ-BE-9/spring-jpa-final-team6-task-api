@@ -1,18 +1,13 @@
 spring:
   application:
-    name: NHN Academy - Spring Boot JPA
+    name: TaskAPI
   jackson:
     property-naming-strategy: SNAKE_CASE
-  jpa:
-    open-in-view: false
-    show-sql: true
-    properties:
-      hibernate:
-        format_sql: true
-        use_sql_comments: true
-        highlight_sql: true
-        auto_quote_keyword: true
-        ddl-auto: create
+  profiles:
+    active: dev
+    group:
+      dev: application-dev
+      prod: application-prod
 
 logging:
   level:

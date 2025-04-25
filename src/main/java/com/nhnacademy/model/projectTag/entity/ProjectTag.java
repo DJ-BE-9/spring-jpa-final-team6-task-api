@@ -13,6 +13,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ProjectTag {
+
+    public ProjectTag(Tag tag, Task task) {
+        this.tag = tag;
+        this.task = task;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long task_tag_id;

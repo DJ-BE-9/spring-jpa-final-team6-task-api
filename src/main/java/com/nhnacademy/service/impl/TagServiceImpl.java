@@ -31,10 +31,7 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
-    public Tag findByIdAndProjectId(long tagId) {
-        if(!existsTag(tagId)) {
-            throw new TagNotFoundException(tagId);
-        }
+    public Tag findByTagId(long tagId) {
         return tagRepository.findById(tagId)
                 .orElseThrow(() -> new TagNotFoundException(tagId));
     }
@@ -67,7 +64,7 @@ public class TagServiceImpl implements TagService {
 
     @Override
     public void delete(long tagId) {
-        if(!existsTag(tagId)) {
+        if(!tagRepository.existsById(tagId)) {
             throw new TagNotFoundException(tagId);
         }
         tagRepository.deleteById(tagId);
