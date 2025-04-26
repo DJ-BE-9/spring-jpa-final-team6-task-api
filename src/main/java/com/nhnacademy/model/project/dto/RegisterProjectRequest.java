@@ -1,9 +1,6 @@
 package com.nhnacademy.model.project.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
@@ -11,7 +8,9 @@ import lombok.Setter;
 @NoArgsConstructor
 public class RegisterProjectRequest {
 
-    String projectName;
-    String projectState;
+    @NonNull
+    private String projectName;
+    @NonNull
+    private String projectState;
 
 }
