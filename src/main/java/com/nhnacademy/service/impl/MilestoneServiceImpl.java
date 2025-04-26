@@ -27,7 +27,7 @@ public class MilestoneServiceImpl implements MilestoneService {
         Milestone m = milestoneRepository.findById(milestoneId).orElseThrow(() -> new MilestoneNotFoundException("milestone not found id: " + milestoneId));
         m.setMilestoneName(milestone.getMilestoneName());
         m.setMilestoneStartedAt(milestone.getMilestoneStartedAt());
-        m.setMilestoneEndedAt( milestone.getMilestoneEndedAt());
+        m.setMilestoneEndedAt(milestone.getMilestoneEndedAt());
         return milestoneRepository.save(m);
     }
 
@@ -38,7 +38,7 @@ public class MilestoneServiceImpl implements MilestoneService {
     }
 
     @Override
-    public List<Milestone> getMilestonesByProjectId(long projectId) {
+    public List<Milestone> getMilestonesbyProjectId(long projectId) {
         return milestoneRepository.findAllByProject_ProjectId(projectId);
     }
 }

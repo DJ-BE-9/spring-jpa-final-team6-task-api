@@ -9,8 +9,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class RegisterCommentRequest {
+public class UpdateCommentRequest {
     String commentContent;
-    long taskId;
-    long commentWriterId;
 }

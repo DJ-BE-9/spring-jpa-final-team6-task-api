@@ -1,0 +1,49 @@
+### POST localhost:7070/project/{projectId}/task/{taskId}/comment 코멘트 등록
+POST http://localhost:7070/project/1/task/1/comment
+Content-Type: application/json
+
+{
+  "comment_content": "안녕하세요. 오늘은 4월 26일입니다. 덥군요. 하지만 추워요 에어컨 틀어서.",
+  "task_id": 1,
+  "comment_writer_id": 1
+}
+
+### POST localhost:7070/project/{projectId}/task/{taskId}/comment 코멘트 등록
+POST http://localhost:7070/project/1/task/1/comment
+Content-Type: application/json
+
+{
+  "comment_content": "comment 테스트 2",
+  "task_id": 1,
+  "comment_writer_id": 1
+}
+
+### POST localhost:7070/project/{projectId}/task/{taskId}/comment 코멘트 등록
+POST http://localhost:7070/project/1/task/1/comment
+Content-Type: application/json
+
+{
+  "comment_content": "comment 테스트 3",
+  "task_id": 1,
+  "comment_writer_id": 1
+}
+
+### PUT localhost:7070/project/{projectId}/task/{taskId}/comment/{commentId} 수정
+PUT http://localhost:7070/project/1/task/1/comment/1
+Content-Type: application/json
+
+{
+  "comment_content": "comment 테스트 1"
+}
+
+### DELETE localhost:7070/project/{projectId}/task/{taskId}/comment/{commentId} 코멘트 삭제
+DELETE http://localhost:7070/project/1/task/1/comment/1
+
+### GET localhost:7070/project/{projectId}/task/{taskId}/comment/{commentId} 코멘트
+GET http://localhost:7070/project/1/task/1/comment/1
+
+### GET localhost:7070/project/{projectId}/task/{taskId}/comment 해당 태스크의 코멘트 목록
+GET http://localhost:7070/project/1/task/1/comment
+
+
+
