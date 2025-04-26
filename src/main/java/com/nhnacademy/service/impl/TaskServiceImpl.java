@@ -1,6 +1,6 @@
 package com.nhnacademy.service.impl;
 
-import com.nhnacademy.exception.ProjectNotFoundException;
+import com.nhnacademy.exception.project.ProjectNotFoundException;
 import com.nhnacademy.exception.task.TaskAlreadyExistsException;
 import com.nhnacademy.exception.task.TaskNotFoundException;
 import com.nhnacademy.model.project.entity.Project;
@@ -37,7 +37,7 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public List<Task> getAllTasksByProjectId(long projectId) {
         Project project = projectRepository.findById(projectId)
-                .orElseThrow(() -> new ProjectNotFoundException(projectId+ " not found"));
+                .orElseThrow(() -> new ProjectNotFoundException(projectId));
         return taskRepository.findAllByProject(project);
     }
 
@@ -48,7 +48,7 @@ public class TaskServiceImpl implements TaskService {
             throw new TaskAlreadyExistsException(title);
         }
         Project project = projectRepository.findById(projectId)
-                .orElseThrow(() -> new ProjectNotFoundException(projectId+ " not found"));
+                .orElseThrow(() -> new ProjectNotFoundException(projectId));
 
         Task task = new Task(request.getTaskTitle(), request.getTaskDescription(), project);
         return taskRepository.save(task);

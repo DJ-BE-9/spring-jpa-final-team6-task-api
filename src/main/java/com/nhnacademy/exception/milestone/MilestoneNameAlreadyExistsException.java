@@ -1,4 +1,4 @@
-package com.nhnacademy.exception;
+package com.nhnacademy.exception.milestone;
 
 public class MilestoneNameAlreadyExistsException extends RuntimeException {
     public MilestoneNameAlreadyExistsException(String milestoneName) {

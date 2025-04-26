@@ -1,6 +1,6 @@
 package com.nhnacademy.service.impl;
 
-import com.nhnacademy.exception.ProjectNotFoundException;
+import com.nhnacademy.exception.project.ProjectNotFoundException;
 import com.nhnacademy.model.project.entity.Project;
 import com.nhnacademy.model.projectMember.dto.RegisterProjectMemberRequest;
 import com.nhnacademy.model.projectMember.entity.ProjectMember;
@@ -24,13 +24,12 @@ public class ProjectMemberServiceImpl implements ProjectMemberService {
     private final ProjectRepository projectRepository;
 
     @Override
-    public Project registerMemberByProject(RegisterProjectMemberRequest request, String userId) {
-        if(Objects.isNull(request) || Objects.isNull(request.getProjectId()) || Objects.isNull(request.isProjectManager()) || userId.isEmpty()) {
+    public Project registerMemberByProject(long projectId, RegisterProjectMemberRequest request) {
+        if(Objects.isNull(request) || Objects.isNull(request.isProjectManager()) || Objects.isNull(request.getUserId())) {
             throw new IllegalArgumentException();
         }
-        log.info("Registering project member with id {}", request.getProjectId());
-        Project project= projectRepository.findById(request.getProjectId()).orElseThrow( () -> new ProjectNotFoundException("project not found"));
-        ProjectMember projectMember = new ProjectMember(project, userId, request.isProjectManager());
+        Project project= projectRepository.findById(projectId).orElseThrow( () -> new ProjectNotFoundException(projectId));
+        ProjectMember projectMember = new ProjectMember(project, request.getUserId(), request.isProjectManager());
         projectMemberRepository.save(projectMember);
         return project;
     }

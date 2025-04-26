@@ -16,44 +16,53 @@ Content-Type: application/json
   "project_state": "ACTIVE"
 }
 
-### POST localhost:7070/project/{userId} 프로젝트 멤버 등록
-POST http://localhost:7070/project/user1
+### POST localhost:7070/project/{projectId}/members 프로젝트 멤버 등록
+POST http://localhost:7070/project/1/members
 Content-Type: application/json
 
 {
-  "project_id": 1,
+  "user_id": "user1",
   "project_manager": false
 }
 
-### POST localhost:7070/project/{userId} 프로젝트 멤버 등록
-POST http://localhost:7070/project/user2
+### POST localhost:7070/project/{projectId}/members 프로젝트 멤버 등록
+POST http://localhost:7070/project/2/members
 Content-Type: application/json
 
 {
-  "project_id": 1,
+  "user_id": "user1",
   "project_manager": false
 }
 
-### POST localhost:7070/project/{userId} 프로젝트 멤버 등록
-POST http://localhost:7070/project/user3
+### POST localhost:7070/project/{projectId}/members 프로젝트 멤버 등록
+POST http://localhost:7070/project/1/members
 Content-Type: application/json
 
 {
-  "project_id": 1,
+  "user_id": "user2",
+  "project_manager": false
+}
+
+### POST localhost:7070/project/{projectId}/members 프로젝트 멤버 등록
+POST http://localhost:7070/project/1/members
+Content-Type: application/json
+
+{
+  "user_id": "user3",
   "project_manager": true
 }
 
 ### POST localhost:7070/project/{userId} 프로젝트 멤버 등록
-POST http://localhost:7070/project/user1
+POST http://localhost:7070/project/1/members
 Content-Type: application/json
 
 {
-  "project_id": 2,
+  "user_id": "user4",
   "project_manager": false
 }
 
 ### GET localhost:7070/project/{userId} 회원이 속한 Project 목록 조회
-GET http://localhost:7070/project/user1
+GET http://localhost:7070/project/members/user1
 
 ### PUT localhost:7070/project/{projectId} 프로젝트 수정
 PUT http://localhost:7070/project/1
@@ -63,6 +72,9 @@ Content-Type: application/json
   "project_name": "프로젝트명 변경",
   "project_state": "COMPLETED"
 }
+
+### GET localhost:7070/project/{projectId} 프로젝트 조회
+GET http://localhost:7070/project/1
 
 ### DELETE localhost:7070/project/{projectId} 프로젝트 삭제
 DELETE http://localhost:7070/project/1

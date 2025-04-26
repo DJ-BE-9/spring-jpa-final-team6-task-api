@@ -1,8 +1,8 @@
 package com.nhnacademy.service.impl;
 
-import com.nhnacademy.exception.MilestoneNameAlreadyExistsException;
-import com.nhnacademy.exception.MilestoneNotFoundException;
-import com.nhnacademy.exception.ProjectNotFoundException;
+import com.nhnacademy.exception.milestone.MilestoneNameAlreadyExistsException;
+import com.nhnacademy.exception.milestone.MilestoneNotFoundException;
+import com.nhnacademy.exception.project.ProjectNotFoundException;
 import com.nhnacademy.model.milestone.dto.RegisterMilestoneRequest;
 import com.nhnacademy.model.milestone.entity.Milestone;
 import com.nhnacademy.model.project.entity.Project;
@@ -26,7 +26,7 @@ public class MilestoneServiceImpl implements MilestoneService {
     @Override
     public Milestone registerMilestone(RegisterMilestoneRequest request, long projectId) {
         Project project = projectRepository.findById(projectId)
-                .orElseThrow(() -> new ProjectNotFoundException(projectId + " not found"));
+                .orElseThrow(() -> new ProjectNotFoundException(projectId));
         if(milestoneRepository.existsMilestoneByMilestoneNameAndProject_ProjectId(request.getMilestoneName(), projectId)) {
             throw new MilestoneNameAlreadyExistsException(request.getMilestoneName());
         }

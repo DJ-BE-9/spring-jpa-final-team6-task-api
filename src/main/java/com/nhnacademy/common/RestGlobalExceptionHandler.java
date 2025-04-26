@@ -2,6 +2,10 @@ package com.nhnacademy.common;
 
 import com.nhnacademy.exception.*;
 import com.nhnacademy.exception.comment.CommentNotFoundException;
+import com.nhnacademy.exception.milestone.MilestoneNameAlreadyExistsException;
+import com.nhnacademy.exception.milestone.MilestoneNotFoundException;
+import com.nhnacademy.exception.project.ProjectAlreadyExistsException;
+import com.nhnacademy.exception.project.ProjectNotFoundException;
 import com.nhnacademy.exception.projectTag.ProjectTagAlreadyExistsException;
 import com.nhnacademy.exception.projectTag.ProjectTagNotFoundException;
 import com.nhnacademy.exception.tag.TagAlreadyExistsException;

@@ -1,17 +1,14 @@
 package com.nhnacademy.service.impl;
 
-import com.nhnacademy.exception.ProjectNotFoundException;
 import com.nhnacademy.exception.projectTag.ProjectTagAlreadyExistsException;
 import com.nhnacademy.exception.projectTag.ProjectTagNotFoundException;
 import com.nhnacademy.exception.tag.TagNotFoundException;
 import com.nhnacademy.exception.task.TaskNotFoundException;
-import com.nhnacademy.model.project.entity.Project;
 import com.nhnacademy.model.projectTag.dto.ProjectTagByTagNameResponse;
 import com.nhnacademy.model.projectTag.dto.ProjectTagRegisterRequest;
 import com.nhnacademy.model.projectTag.entity.ProjectTag;
 import com.nhnacademy.model.tag.entity.Tag;
 import com.nhnacademy.model.task.entity.Task;
-import com.nhnacademy.repository.ProjectRepository;
 import com.nhnacademy.repository.ProjectTagRepository;
 import com.nhnacademy.repository.TagRepository;
 import com.nhnacademy.repository.TaskRepository;

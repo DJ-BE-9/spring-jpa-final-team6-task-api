@@ -1,6 +1,6 @@
 package com.nhnacademy.service.impl;
 
-import com.nhnacademy.exception.ProjectNotFoundException;
+import com.nhnacademy.exception.project.ProjectNotFoundException;
 import com.nhnacademy.model.project.dto.RegisterProjectRequest;
 import com.nhnacademy.model.project.dto.UpdateProjectRequest;
 import com.nhnacademy.model.project.entity.Project;
@@ -45,7 +45,7 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public void deleteProject(Long projectId) {
         if(!existsProject(projectId)) {
-            throw new ProjectNotFoundException("해당 프로젝트가 존재하지 않습니다.");
+            throw new ProjectNotFoundException(projectId);
         }
         projectRepository.deleteById(projectId);
     }
@@ -69,7 +69,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public Project getProjectById(Long projectId) {
-        return projectRepository.findProjectByProjectId(projectId);
+        return projectRepository.findById(projectId).orElseThrow(() -> new ProjectNotFoundException(projectId));
     }
 
 

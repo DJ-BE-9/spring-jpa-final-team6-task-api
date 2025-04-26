@@ -5,6 +5,6 @@ import com.nhnacademy.model.projectMember.dto.RegisterProjectMemberRequest;
 
 public interface ProjectMemberService {
 
-    Project registerMemberByProject(RegisterProjectMemberRequest request, String userId);
+    Project registerMemberByProject(long projectId, RegisterProjectMemberRequest request);
     void deleteProject(long projectId);
 }

@@ -1,6 +1,6 @@
 package com.nhnacademy.controller;
 
-import com.nhnacademy.exception.ProjectNotFoundException;
+import com.nhnacademy.exception.project.ProjectNotFoundException;
 import com.nhnacademy.model.milestone.dto.RegisterMilestoneRequest;
 import com.nhnacademy.model.milestone.dto.UpdateMilestoneRequest;
 import com.nhnacademy.model.milestone.entity.Milestone;
@@ -35,7 +35,7 @@ public class MilestoneController {
                                                                @RequestBody RegisterMilestoneRequest request) {
         Project project = projectService.getProjectById(projectId);
         if (project == null) {
-            throw new ProjectNotFoundException("project not found");
+            throw new ProjectNotFoundException(projectId);
         }
         Milestone milestone = milestoneService.registerMilestone(request,projectId);
         return ResponseEntity.status(HttpStatus.CREATED).body(milestone);
@@ -47,7 +47,7 @@ public class MilestoneController {
                                        @RequestBody UpdateMilestoneRequest request) {
         Project project = projectService.getProjectById(projectId);
         if (project == null) {
-            throw new ProjectNotFoundException("project not found");
+            throw new ProjectNotFoundException(projectId);
         }
         Milestone milestone = new Milestone(milestoneId,  request.getMilestoneName(), project, request.getMilestoneStartedAt(), request.getMilestoneEndedAt());
         return milestoneService.updateMilestone(milestoneId, milestone);

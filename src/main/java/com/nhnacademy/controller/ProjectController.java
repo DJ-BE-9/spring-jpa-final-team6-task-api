@@ -28,17 +28,23 @@ public class ProjectController {
     }
 
     // 해당 프로젝트에 멤버 등록
-    @PostMapping("/{userId}")
-    public ResponseEntity<Project> registerProject(@PathVariable String userId, @RequestBody RegisterProjectMemberRequest request) {
-        Project project = projectMemberService.registerMemberByProject(request, userId);
+    @PostMapping("/{projectId}/members")
+    public ResponseEntity<Project> registerProject(@PathVariable long projectId, @RequestBody RegisterProjectMemberRequest request) {
+        Project project = projectMemberService.registerMemberByProject(projectId, request);
         return ResponseEntity.status(HttpStatus.CREATED).body(project);
     }
 
     // 회원이 등록한 프로젝트 목록
-    @GetMapping("/{userId}")
+    @GetMapping("/members/{userId}")
     public ResponseEntity<List<Project>> getProjects(@PathVariable String userId) {
         List<Project> projects = projectService.getAllProjectsByUserId(userId);
         return ResponseEntity.status(HttpStatus.OK).body(projects);
+    }
+
+    @GetMapping("/{projectId}")
+    public ResponseEntity<Project> getProject(@PathVariable long projectId) {
+        Project project = projectService.getProjectById(projectId);
+        return ResponseEntity.status(HttpStatus.OK).body(project);
     }
 
     @PutMapping("/{projectId}")
