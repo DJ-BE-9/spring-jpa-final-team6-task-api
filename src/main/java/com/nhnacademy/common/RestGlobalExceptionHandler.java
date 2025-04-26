@@ -1,9 +1,6 @@
 package com.nhnacademy.common;
 
-import com.nhnacademy.exception.ExceptionResponse;
-import com.nhnacademy.exception.MilestoneNotFoundException;
-import com.nhnacademy.exception.ProjectAlreadyExistsException;
-import com.nhnacademy.exception.ProjectNotFoundException;
+import com.nhnacademy.exception.*;
 import com.nhnacademy.exception.comment.CommentNotFoundException;
 import com.nhnacademy.exception.projectTag.ProjectTagAlreadyExistsException;
 import com.nhnacademy.exception.projectTag.ProjectTagNotFoundException;
@@ -27,7 +24,7 @@ public class RestGlobalExceptionHandler {
             TaskAlreadyExistsException.class,
             TagAlreadyExistsException.class,
             ProjectTagAlreadyExistsException.class,
-
+            MilestoneNameAlreadyExistsException.class
     })
     public ResponseEntity<ExceptionResponse> alreadyExistsException(ProjectAlreadyExistsException e) {
         ExceptionResponse exceptionResponse = new ExceptionResponse(e.getMessage(),HttpStatus.BAD_REQUEST.toString(),LocalDateTime.now());

@@ -9,5 +9,5 @@ public interface MilestoneService {
     Milestone registerMilestone(RegisterMilestoneRequest request, long projectId);
     Milestone updateMilestone(long milestoneId, Milestone milestone);
     void deleteMilestone(long milestoneId);
-    List<Milestone> getMilestonesByProjectId(long projectId);
+    List<Milestone> getMilestonesbyProjectId(long projectId);
 }

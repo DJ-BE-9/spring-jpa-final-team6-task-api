@@ -2,10 +2,7 @@ package com.nhnacademy.model.comment.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @AllArgsConstructor
@@ -18,11 +15,18 @@ public class Comment {
     private long commentId;
 
     @NotNull
+    @Setter
     private String commentContent;
 
     @NotNull
     private long taskId;
 
     @NotNull
-    private String writerId;
+    private long commentWriterId;
+
+    public Comment(String commentContent, long taskId, long commentWriterId) {
+        this.commentContent = commentContent;
+        this.taskId = taskId;
+        this.commentWriterId = commentWriterId;
+    }
 }

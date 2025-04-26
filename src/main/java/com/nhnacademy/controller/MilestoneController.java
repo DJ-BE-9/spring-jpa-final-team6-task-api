@@ -25,7 +25,7 @@ public class MilestoneController {
     // 해당 프로젝트의 milestone 목록 반환
     @GetMapping("/{projectId}/milestone")
     public List<Milestone> getMilestones(@PathVariable Long projectId) {
-        return milestoneService.getMilestonesByProjectId(projectId);
+        return milestoneService.getMilestonesbyProjectId(projectId);
 
     }
 
