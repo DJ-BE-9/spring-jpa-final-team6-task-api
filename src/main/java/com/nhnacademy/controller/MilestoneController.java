@@ -8,6 +8,8 @@ import com.nhnacademy.model.project.entity.Project;
 import com.nhnacademy.service.MilestoneService;
 import com.nhnacademy.service.ProjectService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,14 +31,14 @@ public class MilestoneController {
 
     // Milestone 등록
     @PostMapping("/{projectId}/milestone")
-    public Milestone registerMilestoneByProject(@PathVariable long projectId,
-                                    @RequestBody RegisterMilestoneRequest request) {
+    public ResponseEntity<Milestone> registerMilestoneByProject(@PathVariable long projectId,
+                                                               @RequestBody RegisterMilestoneRequest request) {
         Project project = projectService.getProjectById(projectId);
         if (project == null) {
             throw new ProjectNotFoundException("project not found");
         }
-        Milestone milestone = new Milestone(request.getMilestoneName(),request.getMilestoneStartedAt(), request.getMilestoneEndedAt(), project);
-        return milestoneService.registerMilestone(milestone);
+        Milestone milestone = milestoneService.registerMilestone(request,projectId);
+        return ResponseEntity.status(HttpStatus.CREATED).body(milestone);
     }
 
     @PutMapping("/{projectId}/milestone/{milestoneId}")

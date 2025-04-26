@@ -18,7 +18,7 @@ public interface TagService {
     List<Tag> findAllByProjectId(Project project);
 
     //등록
-    Tag save(TagRegisterRequest request, long projectId);
+    Tag registerTag(TagRegisterRequest request, long projectId);
 
     //수정
     Tag updateTag(long tagId, TagUpdateRequest request);

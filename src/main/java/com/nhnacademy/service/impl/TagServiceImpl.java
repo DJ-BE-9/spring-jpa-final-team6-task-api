@@ -38,19 +38,18 @@ public class TagServiceImpl implements TagService {
 
     @Override
     public List<Tag> findAllByProjectId(Project project) {
-        //TODO 예외처리 ?
         return tagRepository.findAllByProject(project);
     }
 
     @Override
-     public Tag save(TagRegisterRequest request, long projectId) {
+     public Tag registerTag(TagRegisterRequest request, long projectId) {
         Project project = projectRepository.findById(projectId)
                 .orElseThrow(() -> new ProjectNotFoundException(projectId+" not found"));
         String tagName = request.getTagName();
-        if(tagRepository.existsByTagName(tagName)) {
+        if(tagRepository.existsByTagNameAndProject_ProjectId(tagName,projectId)) {
             throw new TagAlreadyExistsException(tagName);
         }
-        Tag tag = new Tag(null, request.getTagName(),project);
+        Tag tag = new Tag(request.getTagName(),project);
         return tagRepository.save(tag);
     }
 

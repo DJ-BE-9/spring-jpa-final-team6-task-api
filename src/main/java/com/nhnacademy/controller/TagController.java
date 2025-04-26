@@ -41,7 +41,7 @@ public class TagController {
 
     @PostMapping("/project/{projectId}/tag")
     public ResponseEntity<Tag> registerTag(@Valid @RequestBody TagRegisterRequest tagRegisterRequest, @PathVariable("projectId") Long projectId) {
-        Tag tag = tagService.save(tagRegisterRequest,projectId);
+        Tag tag = tagService.registerTag(tagRegisterRequest,projectId);
         return ResponseEntity.status(HttpStatus.CREATED).body(tag);
     }
 

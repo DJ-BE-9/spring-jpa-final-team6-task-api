@@ -11,8 +11,9 @@ import lombok.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Tag {
 
-    public Tag(String tagName) {
+    public Tag(String tagName, Project project) {
         this.tagName = tagName;
+        this.project = project;
     }
 
     @Id

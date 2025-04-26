@@ -1,6 +1,7 @@
 package com.nhnacademy.common;
 
 import com.nhnacademy.exception.ExceptionResponse;
+import com.nhnacademy.exception.MilestoneNotFoundException;
 import com.nhnacademy.exception.ProjectAlreadyExistsException;
 import com.nhnacademy.exception.ProjectNotFoundException;
 import com.nhnacademy.exception.projectTag.ProjectTagAlreadyExistsException;
@@ -58,7 +59,7 @@ public class RestGlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exceptionResponse);
     }
 
-    //projectTag.
+    //projectTag
     @ExceptionHandler(ProjectTagAlreadyExistsException.class)
     public ResponseEntity<ExceptionResponse> projectAlreadyExistsException(ProjectTagAlreadyExistsException e) {
         ExceptionResponse exceptionResponse = new ExceptionResponse(e.getMessage(),HttpStatus.BAD_REQUEST.toString(), LocalDateTime.now());
@@ -68,6 +69,13 @@ public class RestGlobalExceptionHandler {
     public ResponseEntity<ExceptionResponse> projectNotFoundException(ProjectTagNotFoundException e) {
         ExceptionResponse exceptionResponse = new ExceptionResponse(e.getMessage(),HttpStatus.NOT_FOUND.toString(), LocalDateTime.now());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exceptionResponse);
+    }
+
+    //milestone
+    @ExceptionHandler(MilestoneNotFoundException.class)
+    public ResponseEntity<ExceptionResponse> milestoneNotFoundException(MilestoneNotFoundException e) {
+        ExceptionResponse exceptionResponse = new ExceptionResponse(e.getMessage(),HttpStatus.BAD_REQUEST.toString(), LocalDateTime.now());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exceptionResponse);
     }
 
     @ExceptionHandler(Exception.class)

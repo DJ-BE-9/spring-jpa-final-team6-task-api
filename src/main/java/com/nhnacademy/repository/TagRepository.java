@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface TagRepository  extends JpaRepository<Tag, Long> {
     List<Tag> findAllByProject(Project project);
-    boolean existsByTagName(String tagName);
+    boolean existsByTagNameAndProject_ProjectId(String tagName, long projectId);
 }

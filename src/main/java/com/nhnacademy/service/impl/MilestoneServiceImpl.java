@@ -1,8 +1,13 @@
 package com.nhnacademy.service.impl;
 
+import com.nhnacademy.exception.MilestoneNameAlreadyExistsException;
 import com.nhnacademy.exception.MilestoneNotFoundException;
+import com.nhnacademy.exception.ProjectNotFoundException;
+import com.nhnacademy.model.milestone.dto.RegisterMilestoneRequest;
 import com.nhnacademy.model.milestone.entity.Milestone;
+import com.nhnacademy.model.project.entity.Project;
 import com.nhnacademy.repository.MilestoneRepository;
+import com.nhnacademy.repository.ProjectRepository;
 import com.nhnacademy.service.MilestoneService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,10 +20,17 @@ import java.util.List;
 @Transactional
 public class MilestoneServiceImpl implements MilestoneService {
     private final MilestoneRepository milestoneRepository;
+    private final ProjectRepository projectRepository;
 
 
     @Override
-    public Milestone registerMilestone(Milestone milestone) {
+    public Milestone registerMilestone(RegisterMilestoneRequest request, long projectId) {
+        Project project = projectRepository.findById(projectId)
+                .orElseThrow(() -> new ProjectNotFoundException(projectId + " not found"));
+        if(milestoneRepository.existsMilestoneByMilestoneNameAndProject_ProjectId(request.getMilestoneName(), projectId)) {
+            throw new MilestoneNameAlreadyExistsException(request.getMilestoneName());
+        }
+        Milestone milestone = new Milestone(request.getMilestoneName(), request.getMilestoneStartedAt(),request.getMilestoneEndedAt(), project);
         return milestoneRepository.save(milestone);
     }
 
