@@ -63,8 +63,8 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public List<Project> getAllProjectsByUserId(String userId) {
-        return projectMemberRepository.findAllProjectByUserId(userId);
+    public List<Project> getAllProjectsByUserId(String memberId) {
+        return projectMemberRepository.findAllProjectByUserId(memberId);
     }
 
     @Override
