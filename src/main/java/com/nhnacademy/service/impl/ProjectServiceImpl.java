@@ -64,6 +64,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public List<Project> getAllProjectsByUserId(String memberId) {
+        log.error(memberId);
         return projectMemberRepository.findAllProjectByUserId(memberId);
     }
 

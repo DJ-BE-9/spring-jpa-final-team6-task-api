@@ -1,12 +1,14 @@
 package com.nhnacademy.controller;
 
 import com.nhnacademy.model.project.dto.RegisterProjectRequest;
+import com.nhnacademy.model.project.dto.ResponseProjectDto;
 import com.nhnacademy.model.project.dto.UpdateProjectRequest;
 import com.nhnacademy.model.project.entity.Project;
 import com.nhnacademy.model.projectMember.dto.RegisterProjectMemberRequest;
 import com.nhnacademy.service.ProjectMemberService;
 import com.nhnacademy.service.ProjectService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +18,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/project")
+@Slf4j
 public class ProjectController {
     private final ProjectService projectService;
     private final ProjectMemberService projectMemberService;
@@ -36,9 +39,13 @@ public class ProjectController {
 
     // 회원이 등록한 프로젝트 목록
     @GetMapping("/members/{userId}")
-    public ResponseEntity<List<Project>> getProjects(@PathVariable String userId) {
+    public ResponseEntity<ResponseProjectDto> getProjects(@PathVariable String userId) {
         List<Project> projects = projectService.getAllProjectsByUserId(userId);
-        return ResponseEntity.status(HttpStatus.OK).body(projects);
+        for(Project p : projects) {
+            log.error("{}", p);
+        }
+        ResponseProjectDto projectDto = new ResponseProjectDto(projects);
+        return ResponseEntity.status(HttpStatus.OK).body(projectDto);
     }
 
     @GetMapping("/{projectId}")

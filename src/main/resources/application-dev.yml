@@ -3,6 +3,8 @@ spring:
     name: NHN Academy - Spring Boot JPA
   jackson:
     property-naming-strategy: SNAKE_CASE
+    serialization:
+      write-enums-using-to-string: true
   datasource:
     url: jdbc:h2:mem:testdb
     driver-class-name: org.h2.Driver

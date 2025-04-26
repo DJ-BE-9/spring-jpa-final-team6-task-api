@@ -31,4 +31,13 @@ public class Project {
         this.projectName = projectName;
         this.projectState = projectState;
     }
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "projectId=" + projectId +
+                ", projectName='" + projectName + '\'' +
+                ", projectState=" + projectState +
+                '}';
+    }
 }
