@@ -10,7 +10,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpdateProjectRequest {
-
-    String projectName;
-    String projectState;
+    private String projectName;
+    private String projectState;
 }

@@ -24,6 +24,7 @@ public class Project {
 
     @NotNull
     @Column(name = "project_state")
+    @Enumerated(EnumType.STRING)
     private State projectState;
 
     public Project(String projectName, State projectState) {

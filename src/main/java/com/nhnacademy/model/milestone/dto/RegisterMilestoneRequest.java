@@ -12,7 +12,7 @@ import java.time.ZonedDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RegisterMilestoneRequest {
-    String milestoneName;
-    ZonedDateTime milestoneStartedAt;
-    ZonedDateTime milestoneEndedAt;
+    private String milestoneName;
+    private ZonedDateTime milestoneStartedAt;
+    private ZonedDateTime milestoneEndedAt;
 }

@@ -3,6 +3,7 @@ package com.nhnacademy.model.project.type;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
+
 public enum State {
     ACTIVE,
     DORMANT, //휴면
