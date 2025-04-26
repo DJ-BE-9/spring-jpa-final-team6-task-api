@@ -35,7 +35,6 @@ public class CommentServiceImpl implements CommentService {
         if(Objects.isNull(request) || Objects.isNull(request.getCommentContent())){
             throw new IllegalArgumentException();
         }
-
         Comment comment = getCommentById(commentId);
         comment.setCommentContent(request.getCommentContent());
         commentRepository.save(comment);
@@ -49,10 +48,9 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public Comment getCommentById(long commentId) {
-        Comment comment = commentRepository.findById(commentId).orElseThrow(() ->
+        return commentRepository.findById(commentId).orElseThrow(() ->
                 new CommentNotFoundException(commentId)
         );
-        return comment;
     }
 
     @Override
