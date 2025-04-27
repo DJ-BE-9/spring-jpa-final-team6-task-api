@@ -32,6 +32,8 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public long registerProject(RegisterProjectRequest registerProjectRequest) {
+        log.info("Registering project: {}", registerProjectRequest.getProjectState());
+        log.info("Registering project: {}", registerProjectRequest.getProjectName());
         if(Objects.isNull(registerProjectRequest) || Objects.isNull(registerProjectRequest.getProjectState()) || Objects.isNull(registerProjectRequest.getProjectName()) ) {
             throw new IllegalArgumentException();
         }
