@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ProjectService {
     boolean existsProject(long projectId);
-    Project registerProject(RegisterProjectRequest registerProjectRequest);
+    long registerProject(RegisterProjectRequest registerProjectRequest);
     void deleteProject(Long projectId);
     void updateProject(Long projectId, UpdateProjectRequest updateProjectRequest);
     List<Project> getAllProjectsByUserId(String userId);

@@ -2,6 +2,7 @@ package com.nhnacademy.controller;
 
 import com.nhnacademy.model.project.dto.RegisterProjectRequest;
 import com.nhnacademy.model.project.dto.ResponseProjectDto;
+import com.nhnacademy.model.project.dto.ResponseProjectIdDto;
 import com.nhnacademy.model.project.dto.UpdateProjectRequest;
 import com.nhnacademy.model.project.entity.Project;
 import com.nhnacademy.model.projectMember.dto.RegisterProjectMemberRequest;
@@ -23,13 +24,14 @@ public class ProjectController {
     private final ProjectService projectService;
     private final ProjectMemberService projectMemberService;
 
-    // project 생성
+    //project 생성
     @PostMapping
-    public ResponseEntity<Project> registerProject(@RequestBody RegisterProjectRequest registerProjectRequest) {
-        log.info("Registering project: " + registerProjectRequest.getProjectName());
-        log.info("Registering project: " + registerProjectRequest.getProjectState());
-        Project project = projectService.registerProject(registerProjectRequest);
-        return ResponseEntity.status(HttpStatus.CREATED).body(project);
+    public ResponseEntity<ResponseProjectIdDto> registerProject(@RequestBody RegisterProjectRequest registerProjectRequest) {
+        long projectId = projectService.registerProject(registerProjectRequest);
+
+        ResponseProjectIdDto response = new ResponseProjectIdDto(projectId);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     // 해당 프로젝트에 멤버 등록
@@ -40,9 +42,9 @@ public class ProjectController {
     }
 
     // 회원이 등록한 프로젝트 목록
-    @GetMapping("/members/{userId}")
-    public ResponseEntity<ResponseProjectDto> getProjects(@PathVariable String userId) {
-        List<Project> projects = projectService.getAllProjectsByUserId(userId);
+    @GetMapping("/members/{memberId}")
+    public ResponseEntity<ResponseProjectDto> getProjects(@PathVariable String memberId) {
+        List<Project> projects = projectService.getAllProjectsByUserId(memberId);
         for(Project p : projects) {
             log.error("{}", p);
         }
