@@ -31,7 +31,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public void registerProject(RegisterProjectRequest registerProjectRequest) {
+    public Project registerProject(RegisterProjectRequest registerProjectRequest) {
         if(Objects.isNull(registerProjectRequest) || Objects.isNull(registerProjectRequest.getProjectState()) || Objects.isNull(registerProjectRequest.getProjectName()) ) {
             throw new IllegalArgumentException();
         }
@@ -39,7 +39,7 @@ public class ProjectServiceImpl implements ProjectService {
         State projectState = State.valueOf(registerProjectRequest.getProjectState());
 
         Project project = new Project(projectName, projectState);
-        projectRepository.save(project);
+        return projectRepository.save(project);
     }
 
     @Override

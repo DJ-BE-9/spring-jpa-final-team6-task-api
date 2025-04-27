@@ -25,9 +25,11 @@ public class ProjectController {
 
     // project 생성
     @PostMapping
-    public ResponseEntity<String> registerProject(@RequestBody RegisterProjectRequest registerProjectRequest) {
-        projectService.registerProject(registerProjectRequest);
-        return ResponseEntity.ok("Project registered!");
+    public ResponseEntity<Project> registerProject(@RequestBody RegisterProjectRequest registerProjectRequest) {
+        log.info("Registering project: " + registerProjectRequest.getProjectName());
+        log.info("Registering project: " + registerProjectRequest.getProjectState());
+        Project project = projectService.registerProject(registerProjectRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).body(project);
     }
 
     // 해당 프로젝트에 멤버 등록
