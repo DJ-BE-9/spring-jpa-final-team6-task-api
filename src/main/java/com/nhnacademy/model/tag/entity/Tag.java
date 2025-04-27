@@ -8,7 +8,7 @@ import lombok.*;
 @Getter
 @Entity
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class Tag {
 
     public Tag(String tagName, Project project) {
