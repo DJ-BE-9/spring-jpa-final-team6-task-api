@@ -35,7 +35,7 @@ class ProjectServiceImplTest {
     }
 
     @Test
-    void existsProject_ShouldReturnTrueWhenExists() {
+    void existsProject() {
         long projectId = 1L;
         when(projectRepository.existsById(projectId)).thenReturn(true);
 
@@ -45,7 +45,7 @@ class ProjectServiceImplTest {
     }
 
     @Test
-    void registerProject_ShouldRegisterProject() {
+    void registerProject() {
         RegisterProjectRequest request = new RegisterProjectRequest("프로젝트", "ACTIVE");
         Project savedProject = new Project(1L, "프로젝트", State.ACTIVE);
 
@@ -57,14 +57,14 @@ class ProjectServiceImplTest {
     }
 
     @Test
-    void registerProject_NullValues_ShouldThrowException() {
+    void registerProject_NullValues() {
         RegisterProjectRequest request = new RegisterProjectRequest(null, null);
 
         assertThrows(IllegalArgumentException.class, () -> projectService.registerProject(request));
     }
 
     @Test
-    void deleteProject_ShouldDeleteProject() {
+    void deleteProject() {
         long projectId = 1L;
         when(projectRepository.existsById(projectId)).thenReturn(true);
 
@@ -74,7 +74,7 @@ class ProjectServiceImplTest {
     }
 
     @Test
-    void deleteProject_NotFound_ShouldThrowException() {
+    void deleteProject_NotFound() {
         long projectId = 1L;
         when(projectRepository.existsById(projectId)).thenReturn(false);
 
@@ -82,7 +82,7 @@ class ProjectServiceImplTest {
     }
 
     @Test
-    void updateProject_ShouldUpdateProject() {
+    void updateProject() {
         long projectId = 1L;
         UpdateProjectRequest request = new UpdateProjectRequest("업데이트 프로젝트", "COMPLETED");
 
@@ -92,7 +92,7 @@ class ProjectServiceImplTest {
     }
 
     @Test
-    void updateProject_NullValues_ShouldThrowException() {
+    void updateProject_NullValues() {
         long projectId = 1L;
         UpdateProjectRequest request = new UpdateProjectRequest(null, null);
 
@@ -100,7 +100,7 @@ class ProjectServiceImplTest {
     }
 
     @Test
-    void getAllProjectsByUserId_ShouldReturnProjects() {
+    void getAllProjectsByUserId() {
         String memberId = "user1";
         List<Project> projects = List.of(new Project("프로젝트1", State.ACTIVE), new Project("프로젝트2", State.COMPLETED));
 
@@ -112,7 +112,7 @@ class ProjectServiceImplTest {
     }
 
     @Test
-    void getProjectById_ShouldReturnProject() {
+    void getProjectById() {
         long projectId = 1L;
         Project project = new Project("프로젝트", State.ACTIVE);
 
@@ -124,7 +124,7 @@ class ProjectServiceImplTest {
     }
 
     @Test
-    void getProjectById_NotFound_ShouldThrowException() {
+    void getProjectById_NotFound() {
         long projectId = 1L;
         when(projectRepository.findById(projectId)).thenReturn(Optional.empty());
 
