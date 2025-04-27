@@ -3,8 +3,8 @@ POST localhost:7070/project/1/task
 Content-Type: application/json
 
 {
-  "task_title": "task test1",
-  "task_description": "This is description"
+  "taskTitle": "task test1",
+  "taskDescription": "This is description"
 }
 
 ### 등록
@@ -12,8 +12,8 @@ POST localhost:7070/project/1/task
 Content-Type: application/json
 
 {
-  "task_title": "2222",
-  "task_description": "This is description2"
+  "taskTitle": "2222",
+  "taskDescription": "This is description2"
 }
 
 ### 단일 조회
@@ -27,8 +27,8 @@ PUT localhost:7070/project/1/task/1
 Content-Type: application/json
 
 {
-  "task_title": "task edit",
-  "task_description": "hello"
+  "taskTitle": "task edit",
+  "taskDescription": "hello"
 }
 
 ### 삭제
