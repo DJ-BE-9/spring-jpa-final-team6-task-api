@@ -28,6 +28,8 @@ public class ProjectController {
     //project 생성
     @PostMapping
     public ResponseEntity<ResponseProjectIdDto> registerProject(@RequestBody RegisterProjectRequest registerProjectRequest) {
+        log.info("registerProject : {}", registerProjectRequest.getProjectName());
+
         long projectId = projectService.registerProject(registerProjectRequest);
 
         ResponseProjectIdDto response = new ResponseProjectIdDto(projectId);
@@ -39,7 +41,7 @@ public class ProjectController {
     @PostMapping("/{projectId}/members")
     public ResponseEntity<ResponseDto> registerProject(@PathVariable long projectId, @RequestBody RegisterProjectMemberRequest request) {
         projectMemberService.registerMemberByProject(projectId, request);
-        ResponseDto projectMemberResponseDto = new ResponseDto(request.getUserId(), "프로젝트 멤버 등록");
+        ResponseDto projectMemberResponseDto = new ResponseDto(request.getMemberId(), "프로젝트 멤버 등록");
         log.info("프로젝트 멤버 등록");
         return ResponseEntity.status(HttpStatus.CREATED).body(projectMemberResponseDto);
     }
