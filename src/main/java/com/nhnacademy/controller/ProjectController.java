@@ -3,6 +3,7 @@ package com.nhnacademy.controller;
 import com.nhnacademy.model.ResponseDto;
 import com.nhnacademy.model.project.dto.RegisterProjectRequest;
 import com.nhnacademy.model.project.dto.ResponseProjectDto;
+import com.nhnacademy.model.project.dto.ResponseProjectIdDto;
 import com.nhnacademy.model.project.dto.UpdateProjectRequest;
 import com.nhnacademy.model.project.entity.Project;
 import com.nhnacademy.model.projectMember.dto.RegisterProjectMemberRequest;
@@ -26,20 +27,12 @@ public class ProjectController {
 
     //project 생성
     @PostMapping
-    public ResponseEntity<ResponseDto> registerProject(@RequestBody RegisterProjectRequest registerProjectRequest) {
-        log.info("registerProjectRequest:{}", registerProjectRequest.getProjectName());
+    public ResponseEntity<ResponseProjectIdDto> registerProject(@RequestBody RegisterProjectRequest registerProjectRequest) {
+        long projectId = projectService.registerProject(registerProjectRequest);
 
-        projectService.registerProject(registerProjectRequest);
-        return ResponseEntity.status(HttpStatus.OK).build();
-    }
+        ResponseProjectIdDto response = new ResponseProjectIdDto(projectId);
 
-    @PostMapping("/{memberId}/register")
-    public ResponseEntity<ResponseDto> postRegisterProject(@PathVariable String memberId,
-                                                           @RequestBody RegisterProjectRequest registerProjectRequest) {
-        log.info("registerProjectRequest:{}", registerProjectRequest.getProjectName());
-
-        projectService.registerProject(registerProjectRequest);
-        return ResponseEntity.status(HttpStatus.OK).build();
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     // 해당 프로젝트에 멤버 등록
