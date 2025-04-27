@@ -7,6 +7,8 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RegisterProjectRequest {
+
     private String projectName;
-    private String projectState;
+    //private String projectState;
+
 }

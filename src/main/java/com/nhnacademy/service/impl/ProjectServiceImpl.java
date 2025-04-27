@@ -32,13 +32,13 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public void registerProject(RegisterProjectRequest registerProjectRequest) {
-        if(Objects.isNull(registerProjectRequest) || Objects.isNull(registerProjectRequest.getProjectState()) || Objects.isNull(registerProjectRequest.getProjectName()) ) {
-            throw new IllegalArgumentException();
-        }
+//        if(Objects.isNull(registerProjectRequest) || Objects.isNull(registerProjectRequest.getProjectState()) || Objects.isNull(registerProjectRequest.getProjectName()) ) {
+//            throw new IllegalArgumentException();
+//        }
         String projectName = registerProjectRequest.getProjectName();
-        State projectState = State.valueOf(registerProjectRequest.getProjectState());
+//        State projectState = State.valueOf(registerProjectRequest.getProjectState());
 
-        Project project = new Project(projectName, projectState);
+        Project project = new Project(registerProjectRequest.getProjectName(), State.ACTIVE);
         projectRepository.save(project);
     }
 
