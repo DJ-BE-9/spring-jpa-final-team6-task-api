@@ -20,6 +20,7 @@ public class TaskController {
         Task task = taskService.getTaskById(taskId);
         return ResponseEntity.status(HttpStatus.OK).body(task);
     }
+
     @GetMapping("project/{projectId}/task")
     public ResponseEntity<ResponseTaskListDto> getTasks(@PathVariable long projectId) {
         List<Task> taskList = taskService.getAllTasksByProjectId(projectId);
