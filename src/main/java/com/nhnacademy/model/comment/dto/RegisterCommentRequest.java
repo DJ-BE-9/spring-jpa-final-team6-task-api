@@ -12,5 +12,5 @@ import lombok.Setter;
 public class RegisterCommentRequest {
     String commentContent;
     long taskId;
-    long commentWriterId;
+    String commentWriterId;
 }

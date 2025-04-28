@@ -37,6 +37,9 @@ public class CommentController {
     public void registerComment(@PathVariable Long projectId,
                                 @PathVariable Long taskId,
                                 @RequestBody RegisterCommentRequest request) {
+
+
+
         commentService.registerComment(request);
     }
     
