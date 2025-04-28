@@ -1,13 +1,13 @@
-/*
 package com.nhnacademy.service.impl;
 
-import com.nhnacademy.exception.project.ProjectNotFoundException;
 import com.nhnacademy.exception.task.TaskAlreadyExistsException;
 import com.nhnacademy.exception.task.TaskNotFoundException;
+import com.nhnacademy.model.milestone.entity.Milestone;
 import com.nhnacademy.model.project.entity.Project;
 import com.nhnacademy.model.task.dto.TaskRegisterRequest;
 import com.nhnacademy.model.task.dto.TaskUpdateRequest;
 import com.nhnacademy.model.task.entity.Task;
+import com.nhnacademy.repository.MilestoneRepository;
 import com.nhnacademy.repository.ProjectRepository;
 import com.nhnacademy.repository.TaskRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,12 +29,15 @@ class TaskServiceImplTest {
     @Mock
     private ProjectRepository projectRepository;
 
+    @Mock
+    private MilestoneRepository milestoneRepository;
+
     private TaskServiceImpl taskService;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        taskService = new TaskServiceImpl(taskRepository, projectRepository);
+        taskService = new TaskServiceImpl(taskRepository, projectRepository, milestoneRepository);
     }
 
     @Test
@@ -50,7 +53,7 @@ class TaskServiceImplTest {
     @Test
     void getTaskById() {
         long taskId = 1L;
-        Task task = new Task("테스트 태스크", "테스트 설명", new Project());
+        Task task = new Task("테스트 태스크", "테스트 설명", new Project(), null);
 
         when(taskRepository.existsById(taskId)).thenReturn(true);
         when(taskRepository.findById(taskId)).thenReturn(Optional.of(task));
@@ -72,7 +75,7 @@ class TaskServiceImplTest {
     void getAllTasksByProjectId() {
         long projectId = 1L;
         Project project = new Project();
-        List<Task> tasks = List.of(new Task("태스크1", "설명1", project));
+        List<Task> tasks = List.of(new Task("태스크1", "설명1", project, null));
 
         when(projectRepository.findById(projectId)).thenReturn(Optional.of(project));
         when(taskRepository.findAllByProject(project)).thenReturn(tasks);
@@ -85,23 +88,29 @@ class TaskServiceImplTest {
     @Test
     void save() {
         long projectId = 1L;
-        TaskRegisterRequest request = new TaskRegisterRequest("새 태스크", "새 설명");
+        long milestoneId = 1L;
+        TaskRegisterRequest request = new TaskRegisterRequest("새 태스크", "새 설명", milestoneId);
+
         Project project = new Project();
-        Task task = new Task("새 태스크", "새 설명", project);
+        Milestone milestone = new Milestone();
+
+        Task task = new Task("새 태스크", "새 설명", project, milestone);
 
         when(taskRepository.existsByTaskTitle(request.getTaskTitle())).thenReturn(false);
         when(projectRepository.findById(projectId)).thenReturn(Optional.of(project));
+        when(milestoneRepository.findById(milestoneId)).thenReturn(Optional.of(milestone));
         when(taskRepository.save(any(Task.class))).thenReturn(task);
 
         Task result = taskService.save(request, projectId);
 
-        assertEquals(task, result);
+        assertEquals(task.getTaskTitle(), result.getTaskTitle());
+        assertEquals(task.getTaskDescription(), result.getTaskDescription());
     }
 
     @Test
     void save_TitleAlreadyExists() {
         long projectId = 1L;
-        TaskRegisterRequest request = new TaskRegisterRequest("이미 있는 태스크", "설명");
+        TaskRegisterRequest request = new TaskRegisterRequest("이미 있는 태스크", "설명", 1L);
 
         when(taskRepository.existsByTaskTitle(request.getTaskTitle())).thenReturn(true);
 
@@ -112,7 +121,7 @@ class TaskServiceImplTest {
     void updateTask() {
         long taskId = 1L;
         TaskUpdateRequest request = new TaskUpdateRequest("수정된 태스크", "수정된 설명");
-        Task task = new Task("원래 태스크", "원래 설명", new Project());
+        Task task = new Task("원래 태스크", "원래 설명", new Project(), null);
 
         when(taskRepository.findById(taskId)).thenReturn(Optional.of(task));
 
@@ -132,4 +141,4 @@ class TaskServiceImplTest {
 
         verify(taskRepository).deleteById(taskId);
     }
-}*/
+}

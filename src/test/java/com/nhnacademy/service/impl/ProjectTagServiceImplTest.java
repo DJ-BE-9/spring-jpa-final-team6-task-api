@@ -1,13 +1,12 @@
-/*
 package com.nhnacademy.service.impl;
 
 import com.nhnacademy.exception.projectTag.ProjectTagAlreadyExistsException;
 import com.nhnacademy.exception.projectTag.ProjectTagNotFoundException;
 import com.nhnacademy.exception.tag.TagNotFoundException;
 import com.nhnacademy.exception.task.TaskNotFoundException;
-import com.nhnacademy.model.tag.dto.ProjectTagByTagNameResponse;
 import com.nhnacademy.model.projectTag.dto.ProjectTagRegisterRequest;
 import com.nhnacademy.model.projectTag.entity.ProjectTag;
+import com.nhnacademy.model.tag.dto.ResponseGetTagsDto;
 import com.nhnacademy.model.tag.entity.Tag;
 import com.nhnacademy.model.task.entity.Task;
 import com.nhnacademy.repository.ProjectTagRepository;
@@ -21,8 +20,10 @@ import org.mockito.MockitoAnnotations;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
+import static org.springframework.test.util.ReflectionTestUtils.setField;
 
 class ProjectTagServiceImplTest {
 
@@ -67,8 +68,12 @@ class ProjectTagServiceImplTest {
     void findTagNameByTaskId() {
         long taskId = 1L;
         Tag tag1 = new Tag();
+        setField(tag1, "tagId", 1L);
         tag1.setTagName("태그1");
+
+
         Tag tag2 = new Tag();
+        setField(tag2, "tagId", 2L);
         tag2.setTagName("태그2");
 
         ProjectTag projectTag1 = new ProjectTag(tag1, new Task());
@@ -77,11 +82,11 @@ class ProjectTagServiceImplTest {
         when(taskRepository.existsById(taskId)).thenReturn(true);
         when(projectTagRepository.findAllByTask_TaskId(taskId)).thenReturn(List.of(projectTag1, projectTag2));
 
-        List<ProjectTagByTagNameResponse> result = projectTagService.findTagNameByTaskId(taskId);
+        ResponseGetTagsDto result = projectTagService.findTagNameByTaskId(taskId);
 
-        assertEquals(2, result.size());
-        assertEquals("태그1", result.get(0).getTagName());
-        assertEquals("태그2", result.get(1).getTagName());
+        assertEquals(2, result.getTagList().size());
+        assertEquals("태그1", result.getTagList().get(0).getTagName());
+        assertEquals("태그2", result.getTagList().get(1).getTagName());
     }
 
     @Test
@@ -170,4 +175,4 @@ class ProjectTagServiceImplTest {
 
         assertThrows(ProjectTagNotFoundException.class, () -> projectTagService.delete(projectTagId));
     }
-}*/
+}

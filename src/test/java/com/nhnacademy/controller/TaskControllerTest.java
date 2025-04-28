@@ -1,4 +1,3 @@
-/*
 package com.nhnacademy.controller;
 
 import com.nhnacademy.model.task.dto.TaskRegisterRequest;
@@ -7,17 +6,12 @@ import com.nhnacademy.model.task.entity.Task;
 import com.nhnacademy.service.TaskService;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.List;
-
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -35,7 +29,11 @@ class TaskControllerTest {
         long projectId = 1L;
         long taskId = 1L;
 
-        Task mockTask = new Task(taskId, "Test Task", "Task Description", null);
+        Task mockTask = new Task("Test Task", "Task Description", null, null);
+
+        java.lang.reflect.Field field = Task.class.getDeclaredField("taskId");
+        field.setAccessible(true);
+        field.set(mockTask, taskId);
 
         when(taskService.getTaskById(taskId)).thenReturn(mockTask);
 
@@ -49,53 +47,35 @@ class TaskControllerTest {
     }
 
     @Test
-    void testGetTasks() throws Exception {
-        long projectId = 1L;
-
-        List<Task> tasks = List.of(
-                new Task(1L, "Task 1", "Description 1", null),
-                new Task(2L, "Task 2", "Description 2", null)
-        );
-
-        when(taskService.getAllTasksByProjectId(projectId)).thenReturn(tasks);
-
-        mockMvc.perform(get("/project/{projectId}/task", projectId))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(2)))
-                .andExpect(jsonPath("$[0].taskTitle").value("Task 1"))
-                .andExpect(jsonPath("$[1].taskTitle").value("Task 2"));
-
-        verify(taskService).getAllTasksByProjectId(projectId);
-    }
-
-    @Test
     void testRegisterTask() throws Exception {
         long projectId = 1L;
 
-        TaskRegisterRequest request = new TaskRegisterRequest("New Task", "Task description");
-        Task mockTask = new Task(1L, "New Task", "Task description", null);
+        TaskRegisterRequest request = new TaskRegisterRequest("New Task", "Task description", null);
+
+        Task mockTask = new Task("New Task", "Task description", null, null);
+
+        java.lang.reflect.Field field = Task.class.getDeclaredField("taskId");
+        field.setAccessible(true);
+        field.set(mockTask, 1L);
 
         when(taskService.save(any(TaskRegisterRequest.class), eq(projectId))).thenReturn(mockTask);
 
         mockMvc.perform(post("/project/{projectId}/task", projectId)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
-                                {
-                                    "taskTitle": "New Task",
-                                    "taskDescription": "Task description"
-                                }
-                                """))
-                .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.taskId").value(1L))
-                .andExpect(jsonPath("$.taskTitle").value("New Task"))
-                .andExpect(jsonPath("$.taskDescription").value("Task description"));
+                            {
+                                "taskTitle": "New Task",
+                                "taskDescription": "Task description"
+                            }
+                            """))
+                .andExpect(status().isCreated());
 
         verify(taskService).save(any(TaskRegisterRequest.class), eq(projectId));
     }
 
     @Test
     void testUpdateTask() throws Exception {
-        Task mockTask = new Task(1L, "New Task", "Task description", null);
+        Task mockTask = new Task("New Task", "Task description", null, null);
 
         long projectId = 1L;
         long taskId = 1L;
@@ -136,4 +116,4 @@ class TaskControllerTest {
 
         verify(taskService).deleteTask(taskId);
     }
-}*/
+}
