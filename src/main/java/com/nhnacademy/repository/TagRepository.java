@@ -1,6 +1,7 @@
 package com.nhnacademy.repository;
 
 import com.nhnacademy.model.project.entity.Project;
+import com.nhnacademy.model.tag.dto.TagRegisterRequest;
 import com.nhnacademy.model.tag.entity.Tag;
 import org.springframework.data.jpa.repository.JpaRepository;
 
