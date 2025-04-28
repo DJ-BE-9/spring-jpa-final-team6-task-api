@@ -51,8 +51,7 @@ public class MilestoneController {
 
     @GetMapping("/{projectId}/milestone/{milestoneId}")
     public ResponseEntity<ResponseGetMilestoneDto> getMilestoneByMilestoneId(@PathVariable long projectId,
-                                                                            @PathVariable long milestoneId,
-                                                                            @RequestBody UpdateMilestoneRequest request) {
+                                                                            @PathVariable long milestoneId) {
         Project project = projectService.getProjectById(projectId);
         if (project == null) {
             throw new ProjectNotFoundException(projectId);

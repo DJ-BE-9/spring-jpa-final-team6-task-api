@@ -4,10 +4,11 @@ import com.nhnacademy.exception.projectTag.ProjectTagAlreadyExistsException;
 import com.nhnacademy.exception.projectTag.ProjectTagNotFoundException;
 import com.nhnacademy.exception.tag.TagNotFoundException;
 import com.nhnacademy.exception.task.TaskNotFoundException;
-import com.nhnacademy.model.projectTag.dto.ProjectTagByTagNameResponse;
 import com.nhnacademy.model.projectTag.dto.ProjectTagRegisterRequest;
 import com.nhnacademy.model.projectTag.dto.RegisterProjectTagRequest;
 import com.nhnacademy.model.projectTag.entity.ProjectTag;
+import com.nhnacademy.model.tag.dto.ResponseGetTagDto;
+import com.nhnacademy.model.tag.dto.ResponseGetTagsDto;
 import com.nhnacademy.model.tag.entity.Tag;
 import com.nhnacademy.model.task.entity.Task;
 import com.nhnacademy.repository.ProjectTagRepository;
@@ -17,7 +18,6 @@ import com.nhnacademy.service.ProjectTagService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -35,16 +35,20 @@ public class ProjectTagServiceImpl implements ProjectTagService {
     }
 
     @Override
-    public List<ProjectTagByTagNameResponse> findTagNameByTaskId(Long taskId) {
+    public ResponseGetTagsDto findTagNameByTaskId(Long taskId) {
         if(!taskRepository.existsById(taskId)) {
             throw new TaskNotFoundException(taskId);
         }
         List<ProjectTag> projectTagList = projectTagRepository.findAllByTask_TaskId(taskId);
-        List<ProjectTagByTagNameResponse> responseList = new ArrayList<>();
+        ResponseGetTagsDto responseGetTagsDto = new ResponseGetTagsDto();
         for(ProjectTag projectTag : projectTagList) {
-            responseList.add(new ProjectTagByTagNameResponse(projectTag.getTag().getTagName()));
+            responseGetTagsDto.getTagList().add(
+                    new ResponseGetTagDto(
+                            projectTag.getTag().getTagId(),
+                            projectTag.getTag().getTagName())
+            );
         }
-        return responseList;
+        return responseGetTagsDto;
     }
 
     @Override

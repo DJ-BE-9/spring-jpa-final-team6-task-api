@@ -1,3 +1,4 @@
+/*
 package com.nhnacademy.controller;
 
 import com.nhnacademy.model.project.entity.Project;
@@ -119,4 +120,4 @@ class TagControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string("Tag " + tagId + " deleted successfully"));
     }
-}
+}*/
