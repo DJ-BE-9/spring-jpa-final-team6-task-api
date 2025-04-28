@@ -1,10 +1,13 @@
 package com.nhnacademy.service.impl;
 
+import com.nhnacademy.exception.project.EmptyRequestException;
 import com.nhnacademy.exception.project.ProjectNotFoundException;
+import com.nhnacademy.model.project.dto.ProjectIdRequest;
 import com.nhnacademy.model.project.dto.RegisterProjectRequest;
 import com.nhnacademy.model.project.dto.UpdateProjectRequest;
 import com.nhnacademy.model.project.entity.Project;
 import com.nhnacademy.model.project.type.State;
+import com.nhnacademy.model.projectMember.entity.ProjectMember;
 import com.nhnacademy.repository.ProjectMemberRepository;
 import com.nhnacademy.repository.ProjectRepository;
 import com.nhnacademy.service.ProjectService;
@@ -75,6 +78,15 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public Project getProjectById(Long projectId) {
         return projectRepository.findById(projectId).orElseThrow(() -> new ProjectNotFoundException(projectId));
+    }
+
+    @Override
+    public void stateProject(State projectState, long projectId) {
+        if (Objects.isNull(projectState) || projectId < 0) {
+            throw new EmptyRequestException("state 값을 받지 못했습니다.");
+        }
+
+        projectRepository.stateProject(projectState, projectId);
     }
 
 

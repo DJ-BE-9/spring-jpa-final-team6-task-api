@@ -4,8 +4,10 @@ import com.nhnacademy.exception.*;
 import com.nhnacademy.exception.comment.CommentNotFoundException;
 import com.nhnacademy.exception.milestone.MilestoneNameAlreadyExistsException;
 import com.nhnacademy.exception.milestone.MilestoneNotFoundException;
+import com.nhnacademy.exception.project.EmptyRequestException;
 import com.nhnacademy.exception.project.ProjectAlreadyExistsException;
 import com.nhnacademy.exception.project.ProjectNotFoundException;
+import com.nhnacademy.exception.projectMember.AlreadyExistsMemberException;
 import com.nhnacademy.exception.projectTag.ProjectTagAlreadyExistsException;
 import com.nhnacademy.exception.projectTag.ProjectTagNotFoundException;
 import com.nhnacademy.exception.tag.TagAlreadyExistsException;
@@ -28,7 +30,9 @@ public class RestGlobalExceptionHandler {
             TaskAlreadyExistsException.class,
             TagAlreadyExistsException.class,
             ProjectTagAlreadyExistsException.class,
-            MilestoneNameAlreadyExistsException.class
+            MilestoneNameAlreadyExistsException.class,
+            EmptyRequestException.class,
+            AlreadyExistsMemberException.class
     })
     public ResponseEntity<ExceptionResponse> alreadyExistsException(ProjectAlreadyExistsException e) {
         ExceptionResponse exceptionResponse = new ExceptionResponse(e.getMessage(),HttpStatus.BAD_REQUEST.toString(),LocalDateTime.now());
