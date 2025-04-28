@@ -1,11 +1,14 @@
 package com.nhnacademy.model.task.entity;
 
 
+import com.nhnacademy.model.milestone.entity.Milestone;
 import com.nhnacademy.model.project.entity.Project;
-import com.nhnacademy.model.projectTag.entity.ProjectTag;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Entity
@@ -13,10 +16,11 @@ import lombok.*;
 @AllArgsConstructor
 public class Task {
 
-    public Task(String taskTitle, String taskDescription, Project project) {
+    public Task(String taskTitle, String taskDescription, Project project, Milestone milestone) {
         this.taskTitle = taskTitle;
         this.taskDescription = taskDescription;
         this.project = project;
+        this.milestone = milestone;
     }
 
     @Id
@@ -38,6 +42,10 @@ public class Task {
     @ManyToOne(optional = false)
     @JoinColumn(name = "project_id", nullable = false)
     private Project project;
+
+    @OneToOne
+    @JoinColumn(name="milestone_id")
+    private Milestone milestone;
 
 
 }

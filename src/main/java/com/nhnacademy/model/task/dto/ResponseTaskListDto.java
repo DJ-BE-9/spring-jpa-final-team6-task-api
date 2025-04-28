@@ -5,12 +5,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
-@Setter
+import java.util.ArrayList;
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
-public class TaskRegisterRequest {
-    private String taskTitle;
-    private String taskDescription;
-    private Long milestoneId;
+@Getter
+@Setter
+public class ResponseTaskListDto {
+    List<ResponseTaskDto> tasks = new ArrayList<>();
 }

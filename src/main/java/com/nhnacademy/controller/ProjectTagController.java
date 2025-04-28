@@ -1,10 +1,8 @@
 package com.nhnacademy.controller;
 
 import com.nhnacademy.model.projectTag.dto.ProjectTagByTagNameResponse;
-import com.nhnacademy.model.projectTag.dto.ProjectTagRegisterRequest;
-import com.nhnacademy.model.projectTag.entity.ProjectTag;
+import com.nhnacademy.model.projectTag.dto.RegisterProjectTagRequest;
 import com.nhnacademy.service.ProjectTagService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,10 +17,18 @@ public class ProjectTagController {
     private final ProjectTagService projectTagService;
 
     //등록
-    @PostMapping("/project/{projectId}/task/{taskId}/projectTag")
-    public ResponseEntity<ProjectTag> registerTaskTag(@PathVariable("projectId") Long projectId, @PathVariable("taskId") Long taskId, @Valid @RequestBody ProjectTagRegisterRequest request) {
+    /*@PostMapping("/project/{projectId}/task/{taskId}/projectTag")
+    public ResponseEntity<ProjectTag> registerTaskTag(@PathVariable("projectId") Long projectId, @PathVariable("taskId") Long taskId, @RequestBody ProjectTagRegisterRequest request) {
         ProjectTag projectTag = projectTagService.registerProjectTag(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(projectTag);
+    }*/
+
+    //태그 리스트 등록
+    @PostMapping("/project/{projectId}/task/{taskId}/projectTag")
+    public ResponseEntity<Void> registerTaskTagList(@PathVariable("projectId") Long projectId, @PathVariable("taskId") Long taskId, @RequestBody RegisterProjectTagRequest request) {
+        request.setTagIds(List.of(1L));
+        projectTagService.registerProjectTagList(request, taskId);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     //전체 조회

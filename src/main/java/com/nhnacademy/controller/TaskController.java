@@ -1,10 +1,8 @@
 package com.nhnacademy.controller;
 
-import com.nhnacademy.model.task.dto.TaskRegisterRequest;
-import com.nhnacademy.model.task.dto.TaskUpdateRequest;
+import com.nhnacademy.model.task.dto.*;
 import com.nhnacademy.model.task.entity.Task;
 import com.nhnacademy.service.TaskService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,15 +21,24 @@ public class TaskController {
         return ResponseEntity.status(HttpStatus.OK).body(task);
     }
     @GetMapping("project/{projectId}/task")
-    public ResponseEntity<List<Task>> getTasks(@PathVariable long projectId) {
+    public ResponseEntity<ResponseTaskListDto> getTasks(@PathVariable long projectId) {
         List<Task> taskList = taskService.getAllTasksByProjectId(projectId);
-        return ResponseEntity.status(HttpStatus.OK).body(taskList);
+        ResponseTaskListDto responseTaskListDto = new ResponseTaskListDto();
+        for(Task task : taskList) {
+            responseTaskListDto.getTasks().add(
+                    new ResponseTaskDto(task.getTaskId(),
+                            task.getTaskTitle(),
+                            task.getTaskDescription(),
+                            task.getMilestone().getMilestoneId()));
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(responseTaskListDto);
     }
 
     @PostMapping("/project/{projectId}/task")
-    public ResponseEntity<Task> registerTask(@Valid @RequestBody TaskRegisterRequest taskRegisterRequest, @PathVariable Long projectId) {
+    public ResponseEntity<ResponseTaskIdDto> registerTask(@RequestBody TaskRegisterRequest taskRegisterRequest, @PathVariable Long projectId) {
         Task task = taskService.save(taskRegisterRequest, projectId);
-        return ResponseEntity.status(HttpStatus.CREATED).body(task);
+        ResponseTaskIdDto responseTaskIdDto = new ResponseTaskIdDto(task.getTaskId());
+        return ResponseEntity.status(HttpStatus.CREATED).body(responseTaskIdDto);
     }
 
     @PutMapping("/project/{projectId}/task/{taskId}")
