@@ -22,4 +22,6 @@ public interface ProjectTagService {
 
     //삭제
     void delete(long projectTagId);
+
+    void deleteByTaskId(long taskId);
 }

@@ -45,4 +45,11 @@ public class ProjectTagController {
         return ResponseEntity.ok("Deleted task tag");
     }
 
+    // task 삭제
+    @DeleteMapping("/project/{projectId}/task/{taskId}/projectTag")
+    public ResponseEntity<String> deleteProjectTag(@PathVariable Long projectId, @PathVariable Long taskId) {
+        projectTagService.deleteByTaskId(taskId);
+        return ResponseEntity.ok("Deleted task tags");
+    }
+
 }

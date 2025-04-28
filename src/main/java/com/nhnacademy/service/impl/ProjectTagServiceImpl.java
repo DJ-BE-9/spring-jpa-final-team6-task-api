@@ -75,4 +75,12 @@ public class ProjectTagServiceImpl implements ProjectTagService {
         }
         projectTagRepository.deleteById(projectTagId);
     }
+
+    @Override
+    public void deleteByTaskId(long taskId) {
+        if(!taskRepository.existsById(taskId)) {
+            throw new TaskNotFoundException(taskId);
+        }
+        projectTagRepository.deleteByTask_TaskId(taskId);
+    }
 }

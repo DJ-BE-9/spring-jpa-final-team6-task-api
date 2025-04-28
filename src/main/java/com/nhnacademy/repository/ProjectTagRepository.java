@@ -8,4 +8,5 @@ import java.util.List;
 public interface ProjectTagRepository extends JpaRepository<ProjectTag, Long> {
     List<ProjectTag> findAllByTask_TaskId(Long taskId);
     boolean existsByTag_TagIdAndTask_TaskId(Long tagId, Long taskId);
+    void deleteByTask_TaskId(Long taskId);
 }
