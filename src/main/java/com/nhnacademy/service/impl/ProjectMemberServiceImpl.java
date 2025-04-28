@@ -29,7 +29,6 @@ public class ProjectMemberServiceImpl implements ProjectMemberService {
             throw new IllegalArgumentException();
         }
         Project project = projectRepository.findById(projectId).orElseThrow( () -> new ProjectNotFoundException(projectId));
-
         ProjectMember projectMember = new ProjectMember(project, request.getMemberId(), request.isProjectManager());
         projectMemberRepository.save(projectMember);
         return project;
