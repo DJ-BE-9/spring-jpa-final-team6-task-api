@@ -1,4 +1,4 @@
-package com.nhnacademy.model.task.dto;
+package com.nhnacademy.model.project.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,8 +9,9 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class TaskRegisterRequest {
-    private String taskTitle;
-    private String taskDescription;
-    private Long milestoneId;
+public class ProjectMemberRequest {
+
+    private String memberId;
+    private boolean isAdmin;
+
 }

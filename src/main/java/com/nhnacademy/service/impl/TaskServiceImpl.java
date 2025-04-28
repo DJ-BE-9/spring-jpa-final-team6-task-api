@@ -1,12 +1,15 @@
 package com.nhnacademy.service.impl;
 
+import com.nhnacademy.exception.milestone.MilestoneNotFoundException;
 import com.nhnacademy.exception.project.ProjectNotFoundException;
 import com.nhnacademy.exception.task.TaskAlreadyExistsException;
 import com.nhnacademy.exception.task.TaskNotFoundException;
+import com.nhnacademy.model.milestone.entity.Milestone;
 import com.nhnacademy.model.project.entity.Project;
 import com.nhnacademy.model.task.dto.TaskRegisterRequest;
 import com.nhnacademy.model.task.dto.TaskUpdateRequest;
 import com.nhnacademy.model.task.entity.Task;
+import com.nhnacademy.repository.MilestoneRepository;
 import com.nhnacademy.repository.ProjectRepository;
 import com.nhnacademy.repository.TaskRepository;
 import com.nhnacademy.service.TaskService;
@@ -20,6 +23,7 @@ import java.util.List;
 public class TaskServiceImpl implements TaskService {
     private final TaskRepository taskRepository;
     private final ProjectRepository projectRepository;
+    private final MilestoneRepository milestoneRepository;
 
     @Override
     public boolean existsTag(long tagId) {
@@ -49,8 +53,10 @@ public class TaskServiceImpl implements TaskService {
         }
         Project project = projectRepository.findById(projectId)
                 .orElseThrow(() -> new ProjectNotFoundException(projectId));
-
-        Task task = new Task(request.getTaskTitle(), request.getTaskDescription(), project);
+        long milestoneId = request.getMilestoneId();
+        Milestone milestone = milestoneRepository.findById(milestoneId)
+                .orElseThrow(() -> new MilestoneNotFoundException(String.format("milestone not found (id: %d) ", milestoneId)));
+        Task task = new Task(request.getTaskTitle(), request.getTaskDescription(), project, milestone);
         return taskRepository.save(task);
     }
 

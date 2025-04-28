@@ -1,10 +1,7 @@
 package com.nhnacademy.controller;
 
 import com.nhnacademy.model.ResponseDto;
-import com.nhnacademy.model.project.dto.RegisterProjectRequest;
-import com.nhnacademy.model.project.dto.ResponseProjectDto;
-import com.nhnacademy.model.project.dto.ResponseProjectIdDto;
-import com.nhnacademy.model.project.dto.UpdateProjectRequest;
+import com.nhnacademy.model.project.dto.*;
 import com.nhnacademy.model.project.entity.Project;
 import com.nhnacademy.model.projectMember.dto.RegisterProjectMemberRequest;
 import com.nhnacademy.service.ProjectMemberService;
@@ -40,10 +37,40 @@ public class ProjectController {
     // 해당 프로젝트에 멤버 등록
     @PostMapping("/{projectId}/members")
     public ResponseEntity<ResponseDto> registerProject(@PathVariable long projectId, @RequestBody RegisterProjectMemberRequest request) {
-        projectMemberService.registerMemberByProject(projectId, request);
+        projectMemberService.registerMemberProject(projectId, request);
         ResponseDto projectMemberResponseDto = new ResponseDto(request.getMemberId(), "프로젝트 멤버 등록");
         log.info("프로젝트 멤버 등록");
         return ResponseEntity.status(HttpStatus.CREATED).body(projectMemberResponseDto);
+    }
+
+    // 해당 프로젝트 멤버 리스트
+    @GetMapping("/{projectId}/members")
+    public ResponseEntity<ResponseProjectMembersDto> getProjectMembers(@PathVariable("projectId") long projectId) {
+        List<ProjectMemberRequest> teamMembers = projectMemberService.getProjectMembers(projectId);
+
+        ResponseProjectMembersDto responseProjectMembersDto = new ResponseProjectMembersDto(teamMembers);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(responseProjectMembersDto);
+    }
+
+    // 프로젝트 멤버 삭제
+    @PostMapping("/{projectId}/members/{memberId}")
+    public ResponseEntity<ResponseDto> postDeleteProjectMember(@PathVariable("projectId") long projectId,
+                                                               @PathVariable("memberId") String memberId) {
+        projectMemberService.deleteProjectMemberByUserId(memberId, projectId);
+
+        ResponseDto responseDto = new ResponseDto(memberId, "member 삭제 성공");
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
+    }
+
+    @PostMapping("/{projectId}/members/{memberId}/state")
+    public ResponseEntity<String> postProjectState(@PathVariable("projectId") long projectId,
+                                                               @PathVariable("memberId") String memberId,
+                                                               @RequestBody ProjectStateRequest projectStateRequest) {
+        projectService.stateProject(projectStateRequest.getProjectState(), projectStateRequest.getProjectId());
+
+        return ResponseEntity.status(HttpStatus.CREATED).body("state update");
     }
 
     // 회원이 등록한 프로젝트 목록

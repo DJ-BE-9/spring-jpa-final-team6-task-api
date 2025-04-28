@@ -28,6 +28,7 @@ public class MilestoneController {
     @GetMapping("/{projectId}/milestone")
     public ResponseEntity<ResponseGetMilestonesDto> getMilestones(@PathVariable Long projectId) {
         ResponseGetMilestonesDto response =  milestoneService.getMilestonesbyProjectId(projectId);
+        log.info("getMilestones response: {}", response);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
@@ -46,6 +47,18 @@ public class MilestoneController {
         Milestone milestone = milestoneService.registerMilestone(request,projectId);
         ResponseGetMilestoneDto response = new ResponseGetMilestoneDto(milestone.getMilestoneId(), milestone.getMilestoneName(), milestone.getMilestoneStartedAt(), milestone.getMilestoneEndedAt());
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @GetMapping("/{projectId}/milestone/{milestoneId}")
+    public ResponseEntity<ResponseGetMilestoneDto> getMilestoneByMilestoneId(@PathVariable long projectId,
+                                                                            @PathVariable long milestoneId,
+                                                                            @RequestBody UpdateMilestoneRequest request) {
+        Project project = projectService.getProjectById(projectId);
+        if (project == null) {
+            throw new ProjectNotFoundException(projectId);
+        }
+        ResponseGetMilestoneDto response = milestoneService.getMilestonebyMilestoneId(milestoneId);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @PutMapping("/{projectId}/milestone/{milestoneId}")

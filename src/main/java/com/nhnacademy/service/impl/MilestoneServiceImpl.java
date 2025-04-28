@@ -64,4 +64,16 @@ public class MilestoneServiceImpl implements MilestoneService {
 
         return dtoList;
     }
+
+    @Override
+    public ResponseGetMilestoneDto getMilestonebyMilestoneId(long milestoneId) {
+        Milestone m = milestoneRepository.findById(milestoneId).orElseThrow(() -> new MilestoneNotFoundException("milestone not found id: " + milestoneId));
+        ResponseGetMilestoneDto response = new ResponseGetMilestoneDto(
+                m.getMilestoneId(),
+                m.getMilestoneName(),
+                m.getMilestoneStartedAt(),
+                m.getMilestoneEndedAt()
+        );
+        return response;
+    }
 }
