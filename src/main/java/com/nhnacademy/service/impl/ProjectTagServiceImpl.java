@@ -6,6 +6,7 @@ import com.nhnacademy.exception.tag.TagNotFoundException;
 import com.nhnacademy.exception.task.TaskNotFoundException;
 import com.nhnacademy.model.projectTag.dto.ProjectTagByTagNameResponse;
 import com.nhnacademy.model.projectTag.dto.ProjectTagRegisterRequest;
+import com.nhnacademy.model.projectTag.dto.RegisterProjectTagRequest;
 import com.nhnacademy.model.projectTag.entity.ProjectTag;
 import com.nhnacademy.model.tag.entity.Tag;
 import com.nhnacademy.model.task.entity.Task;
@@ -57,6 +58,14 @@ public class ProjectTagServiceImpl implements ProjectTagService {
             throw new ProjectTagAlreadyExistsException();
         }
         return projectTagRepository.save(projectTag);
+    }
+
+    @Override
+    public void registerProjectTagList(RegisterProjectTagRequest request, long taskId) {
+        List<Long> tagIds = request.getTagIds();
+        for(Long tagId : tagIds) {
+            registerProjectTag(new ProjectTagRegisterRequest(tagId,taskId));
+        }
     }
 
     @Override

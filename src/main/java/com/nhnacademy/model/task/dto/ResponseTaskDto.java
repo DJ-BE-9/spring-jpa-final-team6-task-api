@@ -5,12 +5,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class TaskRegisterRequest {
+@Getter
+@Setter
+public class ResponseTaskDto {
+    private long taskId;
     private String taskTitle;
     private String taskDescription;
-    private Long milestoneId;
+    private long milestoneId;
 }
