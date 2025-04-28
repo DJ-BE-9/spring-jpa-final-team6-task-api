@@ -25,11 +25,11 @@ public class ProjectMemberServiceImpl implements ProjectMemberService {
 
     @Override
     public Project registerMemberByProject(long projectId, RegisterProjectMemberRequest request) {
-        if(Objects.isNull(request) || Objects.isNull(request.isProjectManager()) || Objects.isNull(request.getUserId())) {
+        if(Objects.isNull(request) || Objects.isNull(request.isProjectManager()) || Objects.isNull(request.getMemberId())) {
             throw new IllegalArgumentException();
         }
-        Project project= projectRepository.findById(projectId).orElseThrow( () -> new ProjectNotFoundException(projectId));
-        ProjectMember projectMember = new ProjectMember(project, request.getUserId(), request.isProjectManager());
+        Project project = projectRepository.findById(projectId).orElseThrow( () -> new ProjectNotFoundException(projectId));
+        ProjectMember projectMember = new ProjectMember(project, request.getMemberId(), request.isProjectManager());
         projectMemberRepository.save(projectMember);
         return project;
     }

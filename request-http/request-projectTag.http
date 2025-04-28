@@ -3,8 +3,8 @@ POST localhost:7070/project/1/task/1/projectTag
 Content-Type: application/json
 
 {
-  "tag_id": 1,
-  "task_id": 1
+  "tagId": 1,
+  "taskId": 1
 }
 
 ### 등록
@@ -12,8 +12,8 @@ POST localhost:7070/project/1/task/1/projectTag
 Content-Type: application/json
 
 {
-  "tag_id": 2,
-  "task_id": 1
+  "tagId": 2,
+  "taskId": 1
 }
 
 ### 전체 조회

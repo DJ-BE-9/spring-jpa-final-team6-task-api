@@ -4,6 +4,8 @@ import com.nhnacademy.exception.milestone.MilestoneNameAlreadyExistsException;
 import com.nhnacademy.exception.milestone.MilestoneNotFoundException;
 import com.nhnacademy.exception.project.ProjectNotFoundException;
 import com.nhnacademy.model.milestone.dto.RegisterMilestoneRequest;
+import com.nhnacademy.model.milestone.dto.ResponseGetMilestoneDto;
+import com.nhnacademy.model.milestone.dto.ResponseGetMilestonesDto;
 import com.nhnacademy.model.milestone.entity.Milestone;
 import com.nhnacademy.model.project.entity.Project;
 import com.nhnacademy.repository.MilestoneRepository;
@@ -50,7 +52,16 @@ public class MilestoneServiceImpl implements MilestoneService {
     }
 
     @Override
-    public List<Milestone> getMilestonesbyProjectId(long projectId) {
-        return milestoneRepository.findAllByProject_ProjectId(projectId);
+    public ResponseGetMilestonesDto getMilestonesbyProjectId(long projectId) {
+        List<Milestone> milestoneList =  milestoneRepository.findAllByProject_ProjectId(projectId);
+        ResponseGetMilestonesDto dtoList = new ResponseGetMilestonesDto();
+        if(!milestoneList.isEmpty()) {
+            for(Milestone milestone : milestoneList) {
+                ResponseGetMilestoneDto dto = new ResponseGetMilestoneDto(milestone.getMilestoneId(), milestone.getMilestoneName(), milestone.getMilestoneStartedAt(), milestone.getMilestoneEndedAt());
+                dtoList.getMilestones().add(dto);
+            }
+        }
+
+        return dtoList;
     }
 }

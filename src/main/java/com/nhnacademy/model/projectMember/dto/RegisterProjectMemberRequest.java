@@ -7,6 +7,6 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RegisterProjectMemberRequest {
-    private String userId;
+    private String memberId;
     private boolean projectManager;
 }

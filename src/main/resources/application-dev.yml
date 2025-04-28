@@ -1,7 +1,5 @@
 spring:
   application:
-    name: NHN Academy - Spring Boot JPA
-  jackson:
     serialization:
       write-enums-using-to-string: true
   datasource:
