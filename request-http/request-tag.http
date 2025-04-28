@@ -3,7 +3,7 @@ POST localhost:7070/project/1/tag
 Content-Type: application/json
 
 {
-  "tag_name": "개발"
+  "tagName": "개발"
 }
 
 ### 등록2
@@ -11,7 +11,7 @@ POST localhost:7070/project/1/tag
 Content-Type: application/json
 
 {
-  "tag_name": "디자인"
+  "tagName": "디자인"
 }
 
 ### 단일 조회
@@ -26,7 +26,7 @@ PUT localhost:7070/project/1/tag/1
 Content-Type: application/json
 
 {
-  "tag_name": "개발부서"
+  "tagName": "개발부서"
 }
 
 ### 삭제

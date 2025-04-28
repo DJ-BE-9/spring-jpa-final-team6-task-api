@@ -1,0 +1,23 @@
+spring:
+  application:
+    serialization:
+      write-enums-using-to-string: true
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
+  h2:
+    console:
+      enabled: true
+  jpa:
+    open-in-view: false
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
+        highlight_sql: true
+        auto_quote_keyword: true
+        ddl-auto: create
