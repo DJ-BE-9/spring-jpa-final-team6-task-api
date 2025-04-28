@@ -3,8 +3,8 @@ POST http://localhost:7070/project
 Content-Type: application/json
 
 {
-  "project_name": "프로젝트1",
-  "project_state": "ACTIVE"
+  "projectName": "프로젝트1",
+  "projectState": "ACTIVE"
 }
 
 ### POST localhost:7070/project 프로젝트 등록 2
@@ -12,8 +12,8 @@ POST http://localhost:7070/project
 Content-Type: application/json
 
 {
-  "project_name": "프로젝트2",
-  "project_state": "ACTIVE"
+  "projectName": "프로젝트2",
+  "projectState": "ACTIVE"
 }
 
 ### POST localhost:7070/project/{projectId}/members 프로젝트 멤버 등록
@@ -21,8 +21,8 @@ POST http://localhost:7070/project/1/members
 Content-Type: application/json
 
 {
-  "user_id": "user1",
-  "project_manager": false
+  "userId": "user1",
+  "projectManager": false
 }
 
 ### POST localhost:7070/project/{projectId}/members 프로젝트 멤버 등록

@@ -2,7 +2,6 @@ spring:
   application:
     name: NHN Academy - Spring Boot JPA
   jackson:
-    property-naming-strategy: SNAKE_CASE
     serialization:
       write-enums-using-to-string: true
   datasource:

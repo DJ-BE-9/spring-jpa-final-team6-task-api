@@ -30,10 +30,17 @@ public class RestGlobalExceptionHandler {
             ProjectTagAlreadyExistsException.class,
             MilestoneNameAlreadyExistsException.class
     })
-    public ResponseEntity<ExceptionResponse> alreadyExistsException(ProjectAlreadyExistsException e) {
+    public ResponseEntity<ExceptionResponse> alreadyExistsException(Exception e) {
         ExceptionResponse exceptionResponse = new ExceptionResponse(e.getMessage(),HttpStatus.BAD_REQUEST.toString(),LocalDateTime.now());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exceptionResponse);
     }
+
+//    @ExceptionHandler(TagAlreadyExistsException.class)
+//    public ResponseEntity<ExceptionResponse> taskAlreadyExistsException(TagAlreadyExistsException e) {
+//        ExceptionResponse exceptionResponse = new ExceptionResponse(e.getMessage(),HttpStatus.BAD_REQUEST.toString(),LocalDateTime.now());
+//        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exceptionResponse);
+//
+//    }
 
     // NotFoundException
     @ExceptionHandler({

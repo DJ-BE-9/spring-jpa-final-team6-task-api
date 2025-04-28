@@ -7,9 +7,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class ResponseGetDto {
-    private Long tagId;
+@AllArgsConstructor
+public class ResponsePostTagDto {
     private String tagName;
 }

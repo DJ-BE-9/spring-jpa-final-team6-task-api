@@ -9,6 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class TagRegisterRequest {
+public class ResponseGetTagDto {
+    private long tagId;
     private String tagName;
 }
