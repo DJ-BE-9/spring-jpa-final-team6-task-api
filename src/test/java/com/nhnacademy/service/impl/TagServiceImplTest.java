@@ -1,10 +1,9 @@
-/*
 package com.nhnacademy.service.impl;
 
-import com.nhnacademy.exception.project.ProjectNotFoundException;
 import com.nhnacademy.exception.tag.TagAlreadyExistsException;
 import com.nhnacademy.exception.tag.TagNotFoundException;
 import com.nhnacademy.model.project.entity.Project;
+import com.nhnacademy.model.tag.dto.ResponseGetTagDto;
 import com.nhnacademy.model.tag.dto.TagRegisterRequest;
 import com.nhnacademy.model.tag.dto.TagUpdateRequest;
 import com.nhnacademy.model.tag.entity.Tag;
@@ -20,6 +19,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+import static org.springframework.test.util.ReflectionTestUtils.setField;
 
 class TagServiceImplTest {
 
@@ -70,13 +70,20 @@ class TagServiceImplTest {
     @Test
     void findAllByProjectId() {
         Project project = new Project();
-        List<Tag> tags = List.of(new Tag("태그1", project));
+        Tag tag = new Tag("태그1", project);
+        setField(tag, "tagId", 1L);
+
+        List<Tag> tags = List.of(tag);
 
         when(tagRepository.findAllByProject(project)).thenReturn(tags);
 
-        List<Tag> result = tagService.findAllByProjectId(project);
+        List<ResponseGetTagDto> expect = List.of(new ResponseGetTagDto(1L, "태그1"));
 
-        assertEquals(tags, result);
+        List<ResponseGetTagDto> result = tagService.findAllByProjectId(project);
+
+        assertEquals(expect.size(), result.size());
+        assertEquals(expect.get(0).getTagId(), result.get(0).getTagId());
+        assertEquals(expect.get(0).getTagName(), result.get(0).getTagName());
     }
 
     @Test
@@ -110,13 +117,13 @@ class TagServiceImplTest {
     @Test
     void updateTag() {
         long tagId = 1L;
-        TagUpdateRequest request = new TagUpdateRequest("수정된 태그");
+        TagUpdateRequest request = new TagUpdateRequest(1L, "수정된 태그");
         Tag tag = new Tag("원래 태그", new Project());
 
         when(tagRepository.findById(tagId)).thenReturn(Optional.of(tag));
         when(tagRepository.save(tag)).thenReturn(tag);
 
-        Tag result = tagService.updateTag(tagId, request);
+        Tag result = tagService.updateTag(tagId, request, 1L);
 
         assertEquals("수정된 태그", result.getTagName());
     }
@@ -138,4 +145,4 @@ class TagServiceImplTest {
 
         assertThrows(TagNotFoundException.class, () -> tagService.delete(tagId));
     }
-}*/
+}

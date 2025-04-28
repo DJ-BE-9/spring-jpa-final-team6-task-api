@@ -1,25 +1,16 @@
 package com.nhnacademy.controller;
 
-import com.nhnacademy.model.ResponseDto;
 import com.nhnacademy.model.project.dto.RegisterProjectRequest;
-import com.nhnacademy.model.project.dto.ResponseProjectDto;
-import com.nhnacademy.model.project.dto.ResponseProjectIdDto;
 import com.nhnacademy.model.project.dto.UpdateProjectRequest;
-import com.nhnacademy.model.project.entity.Project;
-import com.nhnacademy.model.project.type.State;
 import com.nhnacademy.model.projectMember.dto.RegisterProjectMemberRequest;
 import com.nhnacademy.service.ProjectMemberService;
 import com.nhnacademy.service.ProjectService;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-
-import java.util.Collections;
-import java.util.List;
 
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -68,7 +59,7 @@ class ProjectControllerTest {
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.message").value("프로젝트 멤버 등록"));
 
-        verify(projectMemberService).registerMemberByProject(eq(1L), any(RegisterProjectMemberRequest.class));
+        verify(projectMemberService).registerMemberProject(eq(1L), any(RegisterProjectMemberRequest.class));
     }
 
 
